@@ -1,0 +1,342 @@
+.cart-content {
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 5;
+  background-image: url(../../../../../assets/img/line-bg.png), url(../../../../../assets/img/pattern.png);
+  background-repeat: repeat-x, repeat;
+  background-position: left top, center top;
+  background-size: contain, contain;
+  -webkit-background-size: contain, contain;
+}
+
+.cart-wrap {
+  display: block;
+  width: 90%;
+  height: 136px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.block-title {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  height: 100%;
+  position: relative;
+  line-height: 144px;
+  z-index: 1;
+  padding-left: 150px;
+}
+
+.block-title:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: -20px;
+  width: 114px;
+  height: 130px;
+  background: url(../../../../../assets/img/icon-ticket.png) no-repeat center center;
+}
+
+.block-title h2 {
+  font-family: 'Futurab';
+  font-weight: normal;
+  font-size: 36px;
+  color: #e00d7a;
+  line-height: 32px;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: middle;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.block-list {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70%;
+  margin-top: 12px;
+  max-width: 910px;
+  text-align: center;
+}
+
+.select-list {
+  position: relative;
+  height: 48px;
+  width: 290px;
+  margin: 0 5px 12px 5px;
+  display: inline-block;
+}
+
+.select-header {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.select-header span {
+  width: 40px;
+  height: 48px;
+  position: absolute;
+  right: 0px;
+  top: -2px;
+  background: url(../../../../../assets/img/select.png) no-repeat center center;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  z-index: 1
+}
+
+.select-header:hover span {
+  opacity: 0.5
+}
+
+.select-header h3 {
+  display: block;
+  padding: 0 40px 0 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  color: #fff;
+  line-height: 44px;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.select-box {
+  position: absolute;
+  top: 48px;
+  left: 5%;
+  display: none;
+  width: 90%;
+  height: auto;
+  z-index: 999;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.select-box ul {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  display: block;
+  position: relative;
+}
+
+.select-box li {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid #e00d7a;
+}
+
+.select-box li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 11px 0;
+  text-decoration: none;
+}
+
+.select-box li h3 {
+  font-size: 16px;
+  color: #707070;
+  text-align: left;
+  padding: 0 20px;
+  display: block;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.select-header.active {
+  background-color: #e00d7a;
+}
+
+.select-header:hover {
+  background-color: #e00d7a;
+}
+
+.cart-wrap .select-box li.selected {
+  pointer-events: auto;
+}
+
+.select-box li.selected {
+  background-color: #e00d7a;
+  pointer-events: none;
+}
+
+.select-box li.selected h3 {
+  color: #fff;
+}
+
+.select-box li:hover {
+  background-color: #e00d7a;
+}
+
+.select-box li:hover h3 {
+  color: #fff;
+}
+
+.disable-time {
+  background: #ddd !important;
+  opacity: 0.3 !important;
+  pointer-events: none !important;
+  color: #666 !important;
+}
+
+.film-hour li.disable-time h3 {
+  padding: 11px 0;
+  text-align: center
+}
+
+.select-list[data-cate='film'] .select-header {
+  border-radius: 0 30px 30px 30px;
+}
+
+.select-list[data-cate='film'] .select-box {
+  max-height: 350px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.select-list[data-cate='cine'] .select-header {
+  border-radius: 30px 0 30px 30px;
+}
+
+.select-list[data-cate='cine'] .select-box {
+  max-height: 350px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.select-list[data-cate='day'] .select-header {
+  border-radius: 30px 30px 30px 0;
+}
+
+.select-list[data-cate='hour'] .select-header {
+  border-radius: 30px 30px 0 30px;
+}
+
+.select-list[data-cate='cine'] ul {
+  display: none;
+}
+
+.select-list[data-cate='day'] ul {
+  display: none;
+}
+
+.select-list[data-cate='hour'] .drop-3d,
+.select-list[data-cate='hour'] .drop-2d {
+  display: block;
+}
+
+.select-list[data-cate='cine'] .warning {
+  display: block;
+}
+
+.select-list[data-cate='day'] .warning {
+  display: block;
+}
+
+.select-list .warning li {
+  pointer-events: none;
+}
+
+.select-list[data-cate='cine'] .warning {
+  display: block
+}
+
+.select-list[data-cate='cine'] ul {
+  display: block;
+}
+
+.select-list[data-cate='cine'] ul:not(.warning) li {
+  display: block;
+}
+
+.select-list[data-cate='cine'] ul:not(.warning) li.show {
+  display: block;
+}
+
+.select-list[data-cate='day'] .warning {
+  display: block;
+}
+
+.select-list[data-cate='day'] ul {
+  display: block;
+}
+
+.select-list[data-cate='day'] ul:not(.warning) li {
+  display: block;
+}
+
+.select-list[data-cate='day'] ul:not(.warning) li.show {
+  display: block;
+}
+
+.select-list[data-cate='hour'] .warning {
+  display: block;
+}
+
+.select-list[data-cate='hour'] .drop-2d {
+  display: block;
+}
+.drop-2d {
+  display: table;
+  background: #fff;
+  padding: 10px 0;
+}
+
+.film-type {
+  display: table-cell;
+  vertical-align: middle;
+  width: 66px;
+}
+
+.film-hour {
+  display: table-cell;
+  vertical-align: middle;
+  min-width: 180px;
+}
+
+.film-hour ul {
+  display: block;
+  text-align: left;
+}
+
+.film-hour li {
+  display: inline-block;
+  width: 42%;
+  text-align: center;
+  margin: 1px -1px;
+  border: none;
+  background-color: #bcbcbc;
+}
+
+.film-hour li h3 {
+  font-family: 'Futurab';
+  font-size: 18px;
+  font-weight: normal;
+  color: #4d4d4d;
+  padding: 0;
+  text-align: center;
+}
+

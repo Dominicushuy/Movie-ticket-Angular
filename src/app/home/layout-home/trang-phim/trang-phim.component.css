@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    line-height: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    background-size: contain;
+    -webkit-background-size: contain;
+}
+.go-top{background:url(../../../../assets/img/top.png) no-repeat center center;width:61px;height:61px;position:fixed;bottom:30px;right:20px;cursor:pointer;display:none;-webkit-border-radius:50%;border-radius:50%;background-color:#e00d7a;opacity:1;transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;z-index:18;}
+.go-top:hover{box-shadow:0 0 20px rgba(255,255,255,0.5);}
+.go-top.show{ display: block } 
+

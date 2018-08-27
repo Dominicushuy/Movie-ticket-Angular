@@ -1,0 +1,101 @@
+.footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.payment {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 15px 20px;
+}
+
+.payment h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #b3c4d5;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.payment ul {
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.payment ul li {
+  display: inline-block;
+  margin: 0 2px 4px 2px;
+  vertical-align: middle;
+}
+
+.payment ul li a {
+  display: block;
+  line-height: 0;
+  font-family: none;
+  font-size: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.payment ul li a:hover {
+  opacity: 0.5;
+}
+
+.copyright {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 24px 20px;
+  background: #000;
+}
+
+.copyright h2 {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.copyright h2 a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  line-height: 14px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.copyright h2 a:hover {
+  color: #f2b819;
+}
+
+.copyright p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #919191;
+  text-align: center;
+  line-height: 14px;
+}
+
+.copyright p strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.copyright p a {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #919191;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+}
+
+.copyright p a:hover {
+  color: #f2b819;
+}

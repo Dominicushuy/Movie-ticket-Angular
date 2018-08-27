@@ -1,0 +1,554 @@
+<div class="sub-tab">
+  <ul>
+    <li style="z-index: 3;" [ngClass]="{'current' : showfilm == false}" ><a data-name="playing" (click)="Filmshow(1)" >Phim đang chiếu</a></li>
+    <li style="z-index: 2;" [ngClass]="{'current' : showfilm == true}"><a data-name="coming" (click)="Filmshow(2)">Phim sắp chiếu</a></li>
+    <li style="z-index: 1;"><a data-name="special">Suất chiếu đặc biệt</a></li>
+  </ul>
+</div>
+<div class="tab-movie" [ngStyle]="{ 'display' : showfilm ? 'none' : 'block'}" >
+  <div  class="movie-col active"
+        data-open="playing"
+        style="opacity: 1;"
+         >
+    <div class="col-inr" #color>
+
+      <div class="film-item t-2d" 
+           style="height: 480px;"
+           *ngFor="let phim of danhSachPhim | slice:0:15 "
+           [ngClass]="{'cl-org' : phim.MaPhim == 1 || phim.MaPhim == 41 || phim.MaPhim == 81 || phim.MaPhim == 121 , 'cl-ppl-dark' : phim.MaPhim == 11 || phim.MaPhim == 51 || phim.MaPhim == 91 || phim.MaPhim == 131 , 'cl-ppl' : phim.MaPhim == 21 || phim.MaPhim == 61 || phim.MaPhim == 101 || phim.MaPhim == 141 , 'cl-pnk' : phim.MaPhim == 31 || phim.MaPhim == 71 || phim.MaPhim == 111 || phim.MaPhim == 151 
+             }"
+           >
+        <a>
+          <div class="film-item-pic">
+            <img src="{{phim.HinhAnh}}">
+          </div>
+          <div class="film-item-txt">
+            <h3>{{phim.TenPhim}}</h3>
+            <p>{{phim.MoTa}}</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13" (click)='viewTrailer(phim.Trailer)' >TRAILER</a>
+          <a class="cart-btn fontsize13" [routerLink]="['../selected', phim.MaPhim]">Mua vé</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="tab-movie" [ngStyle]="{ 'display' : showfilm ? 'block' : 'none'}">
+  <div class="movie-col" data-open="playing" style="opacity: 0;">
+    <div class="col-inr">
+      <div class="film-item cl-org t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/triluc.jpg" >
+          </div>
+          <div class="film-item-txt">
+            <h3>Trí Lực Siêu Phàm (C16)</h3>
+            <p>Một căn bệnh bí ẩn đã giết chết 98% số trẻ em trên toàn thế giới, 2% sống sót bắt đầu sở hữu những siêu năng lực nguy hiểm. Cô bé 16 tuổi Ruby Rose cùng những người bạn bắt đầu hành trình trốn chạy khỏi khu trại giam của chính phủ. Cả nhóm vừa phải thoát khỏi những cuộc săn đuổi gắt gao, vừa phải tìm cách liên lạc với những nhóm nổi dậy.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/3-2018/hotel3.jpg" >
+          </div>
+          <div class="film-item-txt">
+            <h3>Khách Sạn Huyền Bí 3 2D LT: Kỳ Nghỉ Ma Cà Rồng</h3>
+            <p>Khách Sạn Huyền Bí 3 lần này sẽ là “cuộc chơi lớn” với một phen tiệc tùng sang chảnh hết mức của gia đình Dracula. Đã quá ngán với cường độ làm việc chăm chỉ 365 ngày không nghỉ, bá tước Dracula quyết định “đình công”. Để khai sáng cho người cha trăm tuổi chưa bao giờ bước ra khỏi “lũy tre làng”, vợ chồng nhà Jonathan – Mavis lập ra kế hoạch xả hơi táo bạo: Thuê đứt một du thuyền du lịch hạng sang để đưa tất thảy bộ xậu quái vật già trẻ lớn bé làm một chuyến ra khơi nhớ đời.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13" >TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: auto;">
+        <a >
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/mirai.jpg" alt="Em Gái Đến Từ Tương Lai 2D PĐ">
+          </div>
+          <div class="film-item-txt">
+            <h3>Em Gái Đến Từ Tương Lai 2D PĐ</h3>
+            <p>Từ một cậu bé bướng bỉnh được cưng chiều nhất gia đình, Kun bỗng thấy vị trí của mình bị lung lay khi em gái cậu – Mirai, ra đời. Đố kỵ xen lẫn tủi thân, cậu bé 4 tuổi cảm thấy tình thương của bố mẹ dành cho mình bị giảm sút và cậu hoàn toàn bị choáng ngợp với việc phải trở thành một người anh. Mọi thứ dường rắc rối hơn khi Kun tình cờ phát hiện ra một cánh cổng kỳ lạ nơi đưa cậu đến gặp mẹ mình lúc bà còn là một cô bé và em gái mình – Mirai lại là một học sinh tuổi teen. Trải qua rất nhiều cuộc phiêu lưu, liệu Kun có dần thay đổi bản thân và học được cách trở thành một người anh trai đúng nghĩa?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13" href="http://cinestar.com.vn/lichchieu/5b809a55-28cf-4d24-98c1-1f225bf7d9c0">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-pnk t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/truonghoc.jpg" alt="Trường Học Bá Vương (C16)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Trường Học Bá Vương (C16)</h3>
+            <p>Một sát thủ siêu hạng bị truy sát. Để bảo vệ bản thân, anh phải ngụy trang thành học sinh và trà trộn vào một ngôi trường "bá đạo". Bản lĩnh của tay sát thủ liên tiếp bị thử thách bởi lũ học trò nhất quỷ nhì ma, vô cùng cá tính trong ngôi trường không-giống-ai này. Ngay khi anh cảm thấy có thể hòa nhập với cuộc sống mới, tìm ra lý tưởng của đời mình thì ngôi trường lại gặp nguy hiểm...</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-org t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/robin.jpg" alt="Christopher Robin 2D LT">
+          </div>
+          <div class="film-item-txt">
+            <h3>Christopher Robin 2D LT</h3>
+            <p>Sau bao nhiêu năm, Christopher Robin giờ đây không còn là một cậu bé mà đã là người đàn ông trưởng thành. Sự xoay vần của cuộc sống, công việc khiến anh đến thời gian dành cho gia đình, vợ con còn không có huống hồ là mộng mơ như hồi nhỏ. Cho đến một ngày, lần đầu tiên chú gấu Pooh bước ra khỏi khu rừng kỳ diệu và tìm gặp Christopher Robin để giúp đỡ người bạn thân thiết của mình.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-3d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/themeg.jpg" alt="Cá Mập Siêu Bạo Chúa 3D (C16)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Cá Mập Siêu Bạo Chúa 3D (C16)</h3>
+            <p>Trong chuyến thám hiểm đại dương, đoàn thủy thủ đã khám phá ra Mariana - khu vực biển sâu nhất Trái Đất. Tuy nhiên, cả đoàn bị mắc kẹt dưới đáy Thái Bình Dương, khi đó tính mạng của họ bị đe dọa trước kẻ săn mồi ám ảnh đầy kinh hãi nhất lịch sử - siêu cá mập bạo chúa khổng lồ, thường được biết đến với cái tên Megalodon. Trước tình hình ngàn cân treo sợi tóc, một đội chuyên gia gồm Jonas Taylor (Jason Statham), nhà đại dương và con gái ông đã được tập hợp để đến giải cứu đoàn tàu. Jonas cùng đồng đội sẽ xoay sở ra sao? Liệu họ có thể giải cứu mọi người thoát khỏi sinh vật đáng sợ này?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/ngoilanghp.jpg" alt="Ngôi Làng Hạnh Phúc 2D LT">
+          </div>
+          <div class="film-item-txt">
+            <h3>Ngôi Làng Hạnh Phúc 2D LT</h3>
+            <p>Bob là chú hải ly có cuộc sống rập khuôn hơn bao người bạn khác trong rừng. Cuộc sống của Bob vốn bình dị cho đến khi chú mèo Max xuất hiện. Khác với Bob, Max là chú mèo tràn đầy năng, luôn mơ ước một ngày mình là người nổi tiếng khắp thế giới. Kể từ ngày Max xuất hiện, cuộc sống Bob như bị đảo ngược.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-pnk t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/kun.jpg" alt="Ma Gương (C18)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Ma Gương (C18)</h3>
+            <p>Tiếp nối 3 phần phim cùng tên nổi tiếng của điện ảnh Indonesia, Kuntilanak (2018) kể về vụ mất tích bí ẩn của cậu bé Anjas và hành trình đi "săn ma" tại một ngôi biệt thự bỏ hoang của một nhóm "nhóc tì" hòng nhận được giải thưởng của một đài truyền hình. Tại căn biệt thự, mọi mắt xích về truyền thuyết Kuntilanak đã được nhóm bạn móc nối. Để rồi sau đó, thông qua một chiếc gương cũ kỹ, Kuntilanak với mái tóc đen xoã dài cùng bộ váy trắng toát đã quay trở lại sau ngàn năm bị giam cầm...</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-org t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/timvo.jpg" alt="Tìm Vợ Cho Bà (C13)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Tìm Vợ Cho Bà (C13)</h3>
+            <p>Long – một công tử nhà giàu, hào hoa số 1, nhưng không bao giờ tin vào điều gọi là "tình yêu vĩnh cửu". Vào sinh nhật tuổi 25 của mình, Long bị giang hồ truy đuổi vì món nợ cờ bạc khổng lồ. Nhưng anh sực nhớ đến lời hứa về việc thừa hưởng tài của bà nội. Oái ăm thay, điều kiện để anh có thể có được số gia sản khổng lồ đó là anh phải cưới vợ vào năm 25 tuổi ... Vì vậy, Long buộc phải lên 1 kế hoạch chi tiết để qua mặt bà nội về việc cưới vợ. Anh đã gặp Linh và cả hai cùng thực hiện kế hoạch. Nhưng tất cả đều không dễ dàng như anh tưởng tượng khi "trời tính không bằng... bà tính", cả Linh lẫn bà nội anh đều là những người có cá tính, thông minh và đều không dễ dàng nghe theo lời người khác...</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/robin.jpg" alt="Christopher Robin 2D PĐ">
+          </div>
+          <div class="film-item-txt">
+            <h3>Christopher Robin 2D PĐ</h3>
+            <p>Sau bao nhiêu năm, Christopher Robin giờ đây không còn là một cậu bé mà đã là người đàn ông trưởng thành. Sự xoay vần của cuộc sống, công việc khiến anh đến thời gian dành cho gia đình, vợ con còn không có huống hồ là mộng mơ như hồi nhỏ. Cho đến một ngày, lần đầu tiên chú gấu Pooh bước ra khỏi khu rừng kỳ diệu và tìm gặp Christopher Robin để giúp đỡ người bạn thân thiết của mình.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/07-2018/missionimpossible.jpg" alt="Nhiệm Vụ Bất Khả Thi (C16): Sụp Đổ">
+          </div>
+          <div class="film-item-txt">
+            <h3>Nhiệm Vụ Bất Khả Thi (C16): Sụp Đổ</h3>
+            <p>Ba năm sau Mission: Impossible – Rogue Nation, chàng đặc vụ điển trai và hào hoa bậc nhất trên màn ảnh rộng Ethan Hunt sẽ tái xuất màn bạc trong mùa hè 2018. Trailer đầu tiên của Nhiệm Vụ Bất Khả Thi: Sụp Đổ (Tựa gốc: Mission: Impossible - Fallout) vừa được hãng phát hành Paramount tung ra ngay lập tức trở thành tâm điểm của đại chúng bởi sự trở lại của ngôi sao hành động hàng đầu thế giới Tom Cruise cùng những khoảnh khắc nghẹt thở bắt nguồn từ pha hành động đẳng cấp mang đậm dấu ấn cá nhân anh.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-pnk t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/3-2018/hotel3.jpg" alt="Khách Sạn Huyền Bí 3 2D PĐ: Kỳ Nghỉ Ma Cà Rồng">
+          </div>
+          <div class="film-item-txt">
+            <h3>Khách Sạn Huyền Bí 3 2D PĐ: Kỳ Nghỉ Ma Cà Rồng</h3>
+            <p>Khách Sạn Huyền Bí 3 lần này sẽ là “cuộc chơi lớn” với một phen tiệc tùng sang chảnh hết mức của gia đình Dracula. Đã quá ngán với cường độ làm việc chăm chỉ 365 ngày không nghỉ, bá tước Dracula quyết định “đình công”. Để khai sáng cho người cha trăm tuổi chưa bao giờ bước ra khỏi “lũy tre làng”, vợ chồng nhà Jonathan – Mavis lập ra kế hoạch xả hơi táo bạo: Thuê đứt một du thuyền du lịch hạng sang để đưa tất thảy bộ xậu quái vật già trẻ lớn bé làm một chuyến ra khơi nhớ đời.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-org t-2d" style="height: auto;">
+        <a>
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/thuthachthanchet.jpg" alt="Thử Thách Thần Chết 2 (C16)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Thử Thách Thần Chết 2 (C16)</h3>
+            <p>Sau thành công vang dội của phần 1, tác phẩm điện ảnh đến từ xứ sở kim chi Thử Thách Thần Chết 2 đã trở lại màn ảnh rộng. Hành trình giúp đỡ linh hồn tốt được đầu thai của các vệ thần lần này sẽ diễn ra như thế nào?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-2d" style="height: auto;">
+        <a href="http://cinestar.com.vn/phim/cf369748-5c09-4305-ab67-e33d5f34b556">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/themeg.jpg" alt="Cá Mập Siêu Bạo Chúa (C16)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Cá Mập Siêu Bạo Chúa (C16)</h3>
+            <p>Trong chuyến thám hiểm đại dương, đoàn thủy thủ đã khám phá ra Mariana - khu vực biển sâu nhất Trái Đất. Tuy nhiên, cả đoàn bị mắc kẹt dưới đáy Thái Bình Dương, khi đó tính mạng của họ bị đe dọa trước kẻ săn mồi ám ảnh đầy kinh hãi nhất lịch sử - siêu cá mập bạo chúa khổng lồ, thường được biết đến với cái tên Megalodon. Trước tình hình ngàn cân treo sợi tóc, một đội chuyên gia gồm Jonas Taylor (Jason Statham), nhà đại dương và con gái ông đã được tập hợp để đến giải cứu đoàn tàu. Jonas cùng đồng đội sẽ xoay sở ra sao? Liệu họ có thể giải cứu mọi người thoát khỏi sinh vật đáng sợ này?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: auto;">
+        <a href="http://cinestar.com.vn/phim/d6de44c5-574d-422e-888a-e940ba15521f">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/cophuthuy.jpg" alt="Cô Phù Thủy Nhỏ 2D PĐ">
+          </div>
+          <div class="film-item-txt">
+            <h3>Cô Phù Thủy Nhỏ 2D PĐ</h3>
+            <p>CÔ PHÙ THỦY NHỎ được chuyển thể từ tác phẩm nổi tiếng của Otfried Preussler – một trong những nhà văn viết cho thiếu nhi nổi tiếng nhất nước Đức. Phù Thủy Nhỏ rất muốn tham gia vũ hội ở núi Brocken với các phù thủy khác vào đêm Walpurgis, nhưng cô mới chỉ có… 127 tuổi mà thôi! Vì không thể kiềm chế sự tò mò nên Phù Thủy Nhỏ đã lẻn vào đêm hội, và thật không may, cô đã bị bắt. Để trở thành một phù thủy trưởng thành thực sự, cô bắt buộc phải chấp nhận một thử thách khó khăn, đó là học thuộc 7892 bùa chú trong cuốn sách ma thuật trong vòng một năm. Cùng với sự giúp đỡ của người bạn thân là chú quạ biết nói Abraxas, Phù Thủy Nhỏ cố gắng hết sức để luyện tập các bùa chú hết sức khó nhằn. Không chỉ có vậy, bà phù thủy già độc ác Rumpumpel luôn tạo ra vô vàn chướng ngại nhằm ngăn cản cô trở thành một phù thủy tốt bụng. Liệu Phù Thủy Nhỏ có vượt qua được tất cả các thử thách và bảo vệ được những người bạn của mình?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-pnk t-2d" style="height: auto;">
+        <a href="http://cinestar.com.vn/phim/dafc88ae-d56f-4b7f-bb85-fc0fb65d2e50">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/bantraicu.jpg" alt="Bạn Trai Cũ Tôi Là Điệp Viên (C18)">
+          </div>
+          <div class="film-item-txt">
+            <h3>Bạn Trai Cũ Tôi Là Điệp Viên (C18)</h3>
+            <p>Audrey và Morgan - đôi bạn thân tuổi băm bất ngờ rơi vào một âm mưu quốc tế khi phát hiện ra tay bạn trai đã “đá” Audrey là một điệp viên. Bị truy đuổi gay gắt bởi nhóm sát thủ theo dấu gã bạn trai, hai cô nàng bắt đầu hành trình vòng quanh Châu Âu và rơi vào hàng loạt tình huống cân não cười ra nước mắt để giải cứu thế giới.</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-org t-2d" style="height: auto;">
+        <a href="http://cinestar.com.vn/phim/626a7632-e1a1-4fab-9825-fcb18a4f4fba">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/mirai.jpg" alt="Em Gái Đến Từ Tương Lai 2D LT">
+          </div>
+          <div class="film-item-txt">
+            <h3>Em Gái Đến Từ Tương Lai 2D LT</h3>
+            <p>Từ một cậu bé bướng bỉnh được cưng chiều nhất gia đình, Kun bỗng thấy vị trí của mình bị lung lay khi em gái cậu – Mirai, ra đời. Đố kỵ xen lẫn tủi thân, cậu bé 4 tuổi cảm thấy tình thương của bố mẹ dành cho mình bị giảm sút và cậu hoàn toàn bị choáng ngợp với việc phải trở thành một người anh. Mọi thứ dường rắc rối hơn khi Kun tình cờ phát hiện ra một cánh cổng kỳ lạ nơi đưa cậu đến gặp mẹ mình lúc bà còn là một cô bé và em gái mình – Mirai lại là một học sinh tuổi teen. Trải qua rất nhiều cuộc phiêu lưu, liệu Kun có dần thay đổi bản thân và học được cách trở thành một người anh trai đúng nghĩa?</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-col active" data-open="coming" style="opacity: 1;">
+    <div class="col-inr">
+      <div class="film-item cl-org t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/dd0e06cb-a5ed-4cda-84df-585e2f6310e9">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/changvo.jpg" alt="Chàng Vợ Của Em">
+          </div>
+          <div class="film-item-txt">
+            <h3>Chàng Vợ Của Em</h3>
+            <p>Sau khi liên tục gặp phải rắc rối với người giúp việc, Mai – một cô nàng công sở bận rộn cảm thấy vô cùng may mắn khi tìm được Ngọc – người hứa sẽ chăm sóc nhà cửa và cún cưng của cô một cách tốt nhất. Từ ngày có Ngọc, Mai luôn cảm thấy hạnh phúc và vui vẻ khi trở về nhà, cô tưởng như đã tìm được một “người vợ” lý tưởng mà mình ao ước bấy lâu. Nhưng Mai không hề biết rằng người giúp việc hoàn hảo mà cô luôn tin tưởng lại chính là Hùng – anh trai Ngọc – một “gã khó ưa” mà Mai thường chạm mặt ở công viên. Mai sẽ làm gì khi phát hiện ra bí mật này, và cô sẽ đối mặt với tình cảm của mình ra sao, khi bên cạnh vẫn còn có Mạnh – người đàn ông lịch lãm, nhiều tham vọng và luôn dành cho cô sự chăm sóc đặc biệt trong công việc.</p>
+            <p>Khởi chiếu: Từ 22/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/55d73c82-b203-4c86-9852-6ebf3ee6c03c">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/mile22.jpg" alt="Mile 22">
+          </div>
+          <div class="film-item-txt">
+            <h3>Mile 22</h3>
+            <p></p>
+            <p>Khởi chiếu: Từ 16/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+        <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/9b8e9de6-26b5-42be-8b48-b0985adf6707">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/07-2018/boar.jpg" alt="Boar">
+          </div>
+          <div class="film-item-txt">
+            <h3>Boar</h3>
+            <p></p>
+            <p>Khởi chiếu: Từ 30/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-pnk t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/83b99d5b-0afc-40a0-a0ec-b8b0ba3c69e6">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/hanhlangbian.jpg" alt="Hành Lang Bí Ẩn">
+          </div>
+          <div class="film-item-txt">
+            <h3>Hành Lang Bí Ẩn</h3>
+            <p>Kit, một cô gái trẻ nổi loạn, không kiểm soát được hành vi của mình đã bị mẹ gửi đến ngôi trường nội trú Blackwood. Bất chấp lời cảnh báo từ cô hiệu trưởng lập dị Madame Duret về những mối nguy hiểm từ khu hành lang đen tối , Kit cùng các học sinh khác đã khám phá ra một bí mật cổ xưa khủng khiếp đe dọa tính mạng mỗi người. Liệu họ có thể thoát khỏi ngôi trường mai quái này một cách an toàn?</p>
+            <p>Khởi chiếu: Từ 16/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-org t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/0f840aad-dcdc-4243-a349-bb8142a8e31a">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/alpha.jpg" alt="Alpha: Người Thủ Lĩnh">
+          </div>
+          <div class="film-item-txt">
+            <h3>Alpha: Người Thủ Lĩnh</h3>
+            <p>Alpha: Người Thủ Lĩnh là một tựa phim hành động phiêu lưu đầy tham vọng của hãng Sony. Không chỉ sở hữu phần ngoại cảnh choáng ngợp đặc tả thế giới cổ đại hùng vĩ, tác phẩm còn ôm ấp một kịch bản vô cùng cảm động. Phim là câu chuyện từ thù hóa bạn giữa cậu nhóc tiền sử (Kodi Smit-McPhee) và một chú sói lạc bầy. Cũng từ đây, lịch sử nhân loại hoàn toàn thay đổi.</p>
+            <p>Khởi chiếu: Từ 16/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl-dark t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/41ea6e78-b6ae-4ea6-b83e-daaca0bb4800">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/8-2018/hoandoi.jpg" alt="Hoán Đổi">
+          </div>
+          <div class="film-item-txt">
+            <h3>Hoán Đổi</h3>
+            <p>Dự án phim điện ảnh Hoán Đổi do Việt Hương, Nhã Phương thủ vai đã chính thức khởi động trở lại sau gần 1 năm làm hậu kỳ. Câu chuyện tréo ngoe của bộ phim bắt đầu khi cô ca sĩ Tiên Tiên (Phương) vô tình bị cơn lốc xoáy hoán đổi linh hồn với một vị võ sư (Việt Hương). Từ đây, hàng loạt tình huống dở khóc dở cười xảy ra khi cả hai phải đối điện và học cách làm quen với cuộc sống hằng ngày của người khác.</p>
+            <p>Khởi chiếu: Từ 30/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+      <div class="film-item cl-ppl t-2d" style="height: 479px;">
+        <a href="http://cinestar.com.vn/phim/d66fc29c-a8cb-4222-a709-f802444e1e26">
+          <div class="film-item-pic">
+            <img src="http://cinestar.com.vn/pictures/Cinestar/07-2018/theequalizer2.jpg" alt="Thiện Ác Đối Đầu 2">
+          </div>
+          <div class="film-item-txt">
+            <h3>Thiện Ác Đối Đầu 2</h3>
+            <p>Equalizer 2- Thiện Ác Đối Đầu 2 là một bộ phim hành động cực kỳ gây cấn và kịch tính với sự tham gia diễn xuất trở lại của diễn viên gạo cội Denzel Washington. Trong phim, cựu đặc vụ CIA tiếp tục trở thành “người hùng thầm lặng” truy tìm công lý đặc biệt càng quyết liệt hơn sau cái chết của người bạn thân Susan.</p>
+            <p>Khởi chiếu: Từ 23/08/2018</p>
+          </div>
+        </a>
+        <div class="film-item-type">
+          <span class="icon-2d"></span>
+          <span class="icon-am3d"></span>
+          <span class="icon-3d"></span>
+        </div>
+         <div class="film-item-but">
+          <a class="trailler-btn fontsize13">TRAILER</a>
+          <a class="cart-btn fontsize13">Mua vé</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-col" data-open="special" style="opacity: 0;">
+    <div class="col-inr">
+    </div>
+  </div>
+</div>
+
+<div class="allvideo" style="width: 100%;" [ngStyle]="{ 'display' : showTrailer ? 'block' : 'none' }">
+  <div class="video-list">
+    <div class="close-video" (click)="closeTrailer()"></div>
+    <div class="video-wrap">
+      <iframe width="100%" height="100%" [src]="trailer | safe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>  

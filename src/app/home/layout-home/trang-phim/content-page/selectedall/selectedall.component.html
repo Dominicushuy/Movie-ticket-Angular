@@ -1,0 +1,114 @@
+<div class="schedule-detail-content">
+  <div class="schedule-detail-wrap">
+    <!--SERACH-BLOCK-->
+    <div class="searh-block">
+      <div class="select-list" (click)="openSelectRap()">
+        <div class="select-header">
+          <span></span>
+          <h3>{{tenRap}}</h3>
+        </div>
+        <div class="select-box" [ngStyle]="{'display': onSelectRap ? 'block' : 'none' }">
+          <ul>
+            <li *ngIf="thongBao == true"><a><h3>Vui lòng chọn phim</h3></a></li>
+            <li *ngIf="maRap == 331 || maRap == 341 ||maRap == 351 " (click)="rap1('CGV Aeon Bình Tân')" ><a><h3>CGV Aeon Bình Tân</h3></a></li>
+            <li *ngIf="maRap == 341 || maRap == 351 ||maRap == 361" (click)="rap2('CGV Aeon Tân Phú')"><a><h3  >CGV Aeon Tân Phú</h3></a></li>
+            <li *ngIf="maRap == 351 || maRap == 361 ||maRap == 371" (click)="rap3('CGV VinCom Gò Vấp')"><a><h3 >CGV VinCom Gò Vấp</h3></a></li>
+            <li *ngIf="maRap == 361 || maRap == 371 ||maRap == 381" (click)="rap4('Galaxy Nguyễn Du')"><a><h3 >Galaxy Nguyễn Du</h3></a></li>
+            <li *ngIf="maRap == 371 || maRap == 381 ||maRap == 331" (click)="rap4('Galaxy Tân Bình')"><a><h3 >Galaxy Tân Bình</h3></a></li>
+            <li *ngIf="maRap == 381 || maRap == 331 ||maRap == 341" (click)="rap6('Lotte Cộng Hòa')"><a><h3 >Lotte Cộng Hòa</h3></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="select-list" (click)="openSelectDay()">
+        <div class="select-header">
+          <span></span>
+          <h3 data-holder="Chọn ngày">{{ngayChieu}}</h3>
+        </div>
+        <div class="select-box" [ngStyle]="{'display': onSelectDay ? 'block' : 'none' }">
+          <ul *ngIf="chonRap == false">
+            <li>
+              <a>
+                <h3>Vui lòng chọn Rạp</h3>
+              </a>
+            </li>
+          </ul>
+          <ul [ngStyle]="{'display': chonRap ? 'block' : 'none'}">
+            <li *ngFor="let lichchieu of LichChieu | slice:4:7"
+                (click)="ngayChieuSelected(lichchieu.NgayChieuGioChieu ,lichchieu.MaLichChieu)"
+            >
+              <a>
+                <h3>{{lichchieu.NgayChieuGioChieu | slice:0:10 | daypipe}}</h3>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--SERACH-BLOCK-->
+    <!--FILM-BLOCK-->
+    <div class="film-block">
+      <div class="film-item t-3d">
+        <div class="film-item-pic">
+          <img src="{{hinhAnh}}" >
+        </div>
+        <div class="film-item-txt">
+          <h3>{{tenPhim}}</h3>
+          <!--SCHECULE-BLOCK-->
+          <div class="schedule-block">
+            <div class="schedule-block-load" style="opacity: 1;">
+              <div class="cinema-item">
+                <h4>{{tenRap}}</h4>
+                <div class="row">
+                  <div class="row-date" ><span></span></div>
+                  <div class="row-date"><span >{{ngayChieu == 'CHỌN NGÀY CHIẾU' ? '' : ngayChieu | slice:0:5}}<br>{{ngayChieu == 'CHỌN NGÀY CHIẾU' ? '' : '2018' }}</span></div>
+                  
+                  <div class="row-hour" *ngIf="showDay == 1">
+                    <ul>
+                      <li class="disable-time">19:50</li>
+                      <li class="disable-time">20:35</li>
+                      <li [routerLink]="['../../booking' , maLichChieu1]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'21:15' , NgayChieu:ngayChieu }" 
+                      >21:15</li>
+                      <li [routerLink]="['../../booking' , maLichChieu2]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'22:00' , NgayChieu:ngayChieu }"
+                      >22:00</li>
+                    </ul>
+                  </div>
+                  <div class="row-hour" *ngIf="showDay == 2">
+                    <ul>
+                      <li class="disable-time">20:45</li>
+                      <li [routerLink]="['../../booking' , maLichChieu3]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'21:30' , NgayChieu:ngayChieu }"
+                      >21:30</li>
+                      <li [routerLink]="['../../booking' , maLichChieu4]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'22:15' , NgayChieu:ngayChieu }"
+                      >22:15</li>
+                      <li class="disable-time">23:30</li>
+                    </ul>
+                  </div>
+                  <div class="row-hour" *ngIf="showDay == 3">
+                    <ul>
+                      <li class="disable-time">19:20</li>
+                      <li class="disable-time">20:40</li>
+                      <li [routerLink]="['../../booking' , maLichChieu5]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'21:45' , NgayChieu:ngayChieu }"
+                      >21:45</li>
+                      <li [routerLink]="['../../booking' , maLichChieu6]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'22:30' , NgayChieu:ngayChieu }"
+                      >22:30</li>
+                      <li [routerLink]="['../../booking' , maLichChieu7]"
+                          [queryParams]="{maphim:maPhim ,SuatChieu:'23:15' , NgayChieu:ngayChieu }"
+                      >23:15</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--SCHECULE-BLOCK-->
+        </div>
+      </div>
+    </div>
+    <!--FILM-BLOCK-->
+  </div>
+</div>

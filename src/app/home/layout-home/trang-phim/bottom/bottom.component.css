@@ -1,0 +1,186 @@
+.bottom {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  padding-top: 46px;
+  background: url(../../../../../assets/img/line-bg.png) repeat-x left top;
+  background-size: contain;
+  -webkit-background-size: contain;
+}
+
+.bottom-nav {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow: hidden;
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.logo-footer {
+  display: inline-block;
+  vertical-align: top;
+  width: 183px;
+  height: 92px;
+  background-image: url(../../../../../assets/img/logo.png);
+  cursor: pointer;
+  -webkit-background-size: contain;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.bottom-wrap {
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+  text-align: right;
+  padding-top: 40px;
+}
+
+.bottom-wrap>div {
+  display: inline-block;
+  margin: 0 20px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.bottom-wrap>div h2 {
+  padding: 8px 19px;
+  font-family: 'avantgarde-demi';
+  font-weight: normal;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  line-height: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.bottom-wrap>div ul {
+  width: auto;
+  max-width: 344px;
+}
+
+.bottom-wrap ul li {
+  margin-bottom: 10px;
+  cursor: pointer
+}
+
+.bottom-wrap ul li[data-name='schedule'] a {
+  pointer-events: auto !important;
+}
+
+.bottom-wrap ul li a {
+  font-family: 'MyriadLight';
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: center;
+  text-transform: inherit;
+  color: #b3c4d5;
+  display: block;
+  line-height: 24px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out
+}
+
+.bottom-wrap ul li a:not(.current):hover {
+  color: #f37520;
+}
+
+.bottom-wrap ul li.current a {
+  color: #f37520;
+  pointer-events: none;
+}
+
+.social ul {
+  position: relative;
+  margin: 3px 0 10px 0;
+}
+
+.social ul li {
+  display: inline-block;
+}
+
+.social ul li a {
+  width: 54px;
+  height: 54px;
+  display: block;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  background-size: cover;
+  -webkit-background-size: cover;
+  text-indent: 9999px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.social ul li a:hover {
+  opacity: 0.5;
+}
+
+.social ul li a.facebook {
+  background: url(../../../../../assets/img/scl_facebook.png) no-repeat center center;
+}
+
+.social ul li a.youtube {
+  background: url(../../../../../assets/img/scl_youtube.png) no-repeat center center;
+}
+
+.hotline-tel {
+  display: block;
+  font-family: 'avantgarde';
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 30px;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out
+}
+
+.hotline-tel:hover {
+  color: #f37520;
+}
+
+.bottom-nav-icon {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.bottom-nav-icon ul {
+  position: relative;
+  width: auto;
+}
+
+.bottom-nav-icon ul li {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.bottom-nav-icon ul li a {
+  display: block;
+  line-height: 0;
+  font-size: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.bottom-nav-icon ul li a:hover {
+  opacity: 0.5;
+}
+
+.bottom-nav-icon ul li img {
+  pointer-events: none;
+}
+

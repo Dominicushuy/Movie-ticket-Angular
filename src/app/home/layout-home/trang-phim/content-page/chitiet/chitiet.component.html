@@ -1,0 +1,73 @@
+<!-- Xem chi tiết -->
+<div style="display: block">
+  <div class="sub-tab film">
+    <ul>
+      <li style="z-index: 3;"><a data-name="playing" [routerLink]="['/home/phimdangchieu']">Phim đang chiếu</a></li>
+      <li style="z-index: 2;"><a data-name="coming">Phim sắp chiếu</a></li>
+      <li style="z-index: 1;"><a data-name="special">Suất chiếu đặc biệt</a></li>
+    </ul>
+  </div>
+
+  <!-- Thông tin chi tiết -->
+  <div class="film-details-content">
+    <div class="film-details-wrap">
+      <div class="film-item t-2d">
+        <div class="film-item-pic">
+          <img src="{{chitetPhim.HinhAnh}}" >
+        </div>
+        <div class="film-item-txt">
+          <h3>{{chitetPhim.TenPhim}}</h3>
+          <div class="film-overview">
+            <span class="l-title">Khởi chiếu:</span>
+            <span class="l-value">{{chitetPhim.NgayKhoiChieu | slice:0:10}}</span></div>
+          <div class="film-overview">
+            <span class="l-title">Thể loại:</span>
+            <span class="l-value">Phim hài</span></div>
+          <div class="film-overview">
+            <span class="l-title">Diễn viên:</span>
+            <span class="l-value">Wean Le, Hạ Anh, Gin Tuấn Kiệt, Nhan Phúc Vinh</span>
+          </div>
+          <div class="film-overview">
+            <span class="l-title">Đạo diễn:</span>
+            <span class="l-value">Duy Joseph</span>
+          </div>
+          <div class="film-item-type">
+            <span class="icon-2d"></span>
+            <span class="icon-am3d"></span>
+            <span class="icon-3d"></span>
+          </div>
+          <p>{{chitetPhim.MoTa}}</p>
+          <div class="film-overview">
+            <span class="l-title">Đánh giá:</span>
+            <span class="l-comment"></span>
+            <span class="l-comment"></span>
+            <span class="l-comment"></span>
+            <span class="l-comment"></span>
+            <span class="l-comment"></span> 
+          </div>
+          <div class="film-item-but">
+            <a class="trailler-btn" (click)="viewTrailer()">TRAILER</a>
+            <a class="schedule-btn" >Lịch chiếu</a>
+            <a class="cart-btn fontsize14" [routerLink]="['../../selected',chitetPhim.MaPhim]" >Mua vé</a>
+            <ul class="l-social">
+              <li>Chia sẻ</li>
+              <li class="l-facebook"><a>Facebook</a></li>
+              <li class="l-google"><a>Google</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Show trailer -->
+<div class="allvideo" style="width: 100%;" [ngStyle]="{ 'display' : showTrailer ? 'block' : 'none' }">
+  <div class="video-list">
+    <div class="close-video" (click)="closeTrailer()"></div>
+    <div class="video-wrap">
+      <iframe width="100%" height="100%" [src]="trailer | safe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>  

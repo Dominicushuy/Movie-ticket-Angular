@@ -1,0 +1,335 @@
+<div class="register-content">
+    <div class="register-wrap">
+        <ul>            
+            <li class="btn-register">
+                <a (click)="onShowReg()" >{{ showLogout ? 'Đăng Ký Thành Viên' : 'Thông Tin Thành Viên'}}</a>
+            </li>
+            <li class="btn-login">
+                <a (click)="onShowLog()">{{ showLogout ? 'Đăng Nhập' : 'Đăng Xuất'}}</a>
+            </li>
+        </ul>
+        <a class="hotline" href="tel:0933903874">0933903874</a>
+    </div>
+    <!-- user form -->
+    <div class="block-user">
+        <!--register-tab-->
+        <div class="tab-register" 
+             style="top: auto; left: 0px; margin-left: auto;"
+             [ngStyle]="{'display':showReg && showLogout ? 'block' : 'none' }"
+             
+              >
+            <div class="user-form register">
+                <div class="icon-arrow" style="left: 230.5px;"></div>
+                <h3 class="user-title" *ngIf="formInvalid == true">Vui lòng nhập đầy đủ thông tin để đăng ký!!!</h3>
+                <form   [formGroup]="FormReg"
+                        (ngSubmit)="DangKy(FormReg.value)"
+                        (mouseleave)="closeForm($event)"
+                >
+                    <div class="require-col">
+                        <div class="input-text name">
+                            <span   class="focus-text"
+                                     [ngStyle]="{'display': Taikhoan.value === '' ? 'block' : 'none' }"
+                                    >
+                                    TÀI KHOẢN
+                            </span>
+                            <app-error
+                                [control]="FormReg.controls.TaiKhoan"
+                                [control-name]="'Tài Khoản'"
+                            >
+                            </app-error>
+                            <input  #Taikhoan
+                                    type="text" 
+                                    formControlName='TaiKhoan'
+                            >
+                        </div>
+
+                        <div class="input-text password">
+                            <span   class="focus-text"
+                                    *ngIf="matkhau.value === ''"
+                                    >
+                                    MẬT KHẨU
+                            </span>
+                            <app-error
+                                [control]="FormReg.controls.MatKhau"
+                                [control-name]="'Mật Khẩu'"
+                            >
+                            </app-error>
+                            <input  #matkhau
+                                    type="password"
+                                    formControlName='MatKhau'
+                                    >
+                        </div>
+
+                        <div class="input-text birth">
+                            <span   class="focus-text" 
+                                    *ngIf="name.value === ''"
+                                    >
+                                    HỌ TÊN
+                            </span>
+                            <app-error
+                                [control]="FormReg.controls.HoTen"
+                                [control-name]="'Họ Tên'"
+                            >
+                            </app-error>
+                            <input  #name
+                                    type="text"
+                                    formControlName='HoTen'
+                                    >
+                        </div>
+
+                        <div class="input-text address">
+                            <span   class="focus-text" 
+                                    *ngIf="email.value === ''"
+                                    >
+                                    EMAIL
+                            </span>
+                            <app-error
+                                [control]="FormReg.controls.Email"
+                                [control-name]="'Email'"
+                            >
+                            </app-error>
+                            <input  #email
+                                    type="text"
+                                    formControlName='Email'
+                                    >
+                        </div>
+
+                        <div class="input-text tel">
+                            <span   class="focus-text" 
+                                    *ngIf="phone.value === ''"
+                                    >
+                                    ĐIỆN THOẠI
+                            </span>
+                            <app-error
+                                [control]="FormReg.controls.SoDT"
+                                [control-name]="'Số điện thoại'"
+                            >
+                            </app-error>
+                            <input  #phone
+                                    type="text"
+                                    formControlName='SoDT'
+                                    >
+                        </div>
+
+                        <div class="input-text username">
+                            <label for="" style=" color:#e00d7a ;font-weight:bold" >Mã Nhóm: </label>
+                            <select  type="text" formControlName='MaNhom' name="MaNhom" [(ngModel)]="manhom" >
+                                <option *ngFor="let nhom of mangNhom" value={{nhom}} >{{nhom}}</option>              
+                            </select>
+                        </div>
+
+                        <div class="require-col">
+                            <label class="gender">
+                                <input  type="radio"
+                                        name="MaLoaiNguoiDung" 
+                                        value="KhachHang" 
+                                        formControlName='MaLoaiNguoiDung'>
+                                <span class="gender-name">user</span>
+                                <span class="gender-shape"></span>
+                            </label>
+                            <label class="gender">
+                                <input  type="radio" 
+                                        name="MaLoaiNguoiDung" 
+                                        value="QuanTri"
+                                        formControlName='MaLoaiNguoiDung'
+                                        >
+                                <span class="gender-name">admin</span>
+                                <span class="gender-shape"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="input-check">
+                            <input id="member_accept" name="accept" value="1" type="checkbox"><span></span>Khách hàng đã đồng ý các điều khoản, điều kiện của chúng tôi</div>
+                        <div class="input-but">
+                            <input type="submit" value="ĐĂNG KÝ" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Login-tab-->
+        <div class="tab-login"
+            style="top: auto; left: 188px; right: auto; margin-left: auto;"
+            [ngStyle]="{'display':showLog ? 'block' : 'none' }"
+            > 
+            <div class="user-form login">
+                <div class="icon-arrow" style="left: 50%;"></div>
+                <h3  class="user-title"
+                     style="margin-right: 0" 
+                     *ngIf="formInvalid == true"
+                 >
+                     Vui lòng nhập tài khoản và mật khẩu!!!
+                </h3>
+                <form   [formGroup]="FormLog"
+                        (ngSubmit)="DangNhap(FormLog.value)"
+                >
+                    <div class="require-col">
+                        <div class="input-text username">
+                            <app-error
+                                [control]="FormLog.controls.taikhoan"
+                                [control-name]="'Tài Khoản'"
+                            >
+                            </app-error>
+                            <input  name="username"  
+                                    type="text"
+                                    formControlName='taikhoan'
+                                    placeholder="user..." 
+                                    >
+                        </div>
+                        <div class="input-text password">
+                            <app-error
+                                [control]="FormLog.controls.matkhau"
+                                [control-name]="'Mật khẩu'"
+
+                            >
+                            </app-error>
+                            <input  name="password"
+                                    type="password"
+                                    formControlName='matkhau'
+                                    placeholder="password..." 
+                                    >
+                        </div>
+                        <div class="input-but">
+                            <input type="submit" value="Đăng nhập" >
+                            <a class="user-link" (click)="closeForm($event)" >CLOSE</a>
+                        </div>                            
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay-dark" [ngStyle]="{'display': showInfoUser && showReg ? 'block' : 'none' }" ></div>
+
+<div class="user-wrap" [ngStyle]="{'display': showInfoUser && showReg ? 'block' : 'none' }" >
+    <div class="user-details" >
+        <div class="close-user" (click)="closeUser()"></div>
+        <div class="user-center">
+            <div class="user-info">
+                <h2>Thông tin tài khoản</h2>
+                <ul>
+                    <li>
+                        <div class="col-title">Tài khoản:</div>
+                        <div class="col-value">{{nguoiDung.TaiKhoan}}</div>
+                    </li>
+                    <li>
+                        <div class="col-title">Mật khẩu:</div>
+                        <div class="col-value">{{nguoiDung.MatKhau}}</div>
+                    </li>
+                    <li>
+                        <div class="col-title">Họ tên:</div>
+                        <div class="col-value">{{nguoiDung.HoTen}}</div>
+                    </li>
+                    <li>
+                        <div class="col-title">Email:</div>
+                        <div class="col-value">{{nguoiDung.Email}}</div>
+                    </li>
+                    <li>
+                        <div class="col-title">Số Điện thoại:</div>
+                        <div class="col-value">{{nguoiDung.SoDT}}</div>
+                    </li>
+                    <li>
+                        <div class="col-title">Mã nhóm:</div>
+                        <div class="col-value">{{nguoiDung.MaNhom}}</div>
+                    </li>
+                </ul>
+                <a class="modify-user"
+                   (click)='showChange()'
+                   [ngStyle]="{'display': changeUser ? 'none' : 'block' }"
+                    >Thay đổi thông tin</a>
+            </div>
+
+            <div class="user-history">
+                <h2>Hoạt động với CyBerFilm</h2>
+                <table>
+                    
+                    <tbody>
+                        <tr>
+                            <td>Ngày</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li><div class="col-title">Điểm tích lũy:</div><div class="col-value">0</div></li>
+                    <li><div class="col-title">Loại thẻ:</div><div class="col-value"></div></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="user-center" >
+            <div class="user-form modify"  [ngStyle]="{'display': changeUser ? 'block' : 'none' }">
+                <div class="icon-arrow"></div>
+                <h3 class="user-title" style="margin-right: 10px">Chỉnh sửa thông tin cá nhân</h3>
+                <form   [formGroup]="FormUpdate"
+                        (ngSubmit)="capNhapND(FormUpdate.value)">
+                    <div class="require-col">
+                        <div class="input-text username">
+                            <app-error
+                                [control]="FormUpdate.controls.HoTen"
+                                [control-name]="'Họ Tên'"
+                            >
+                            </app-error>
+                            <input  type="text" 
+                                    [(ngModel)]="nguoiDung.HoTen" 
+                                    placeholder="Họ tên..."
+                                    formControlName="HoTen"
+                            >
+                        </div>
+                        <div class="input-text password">
+                            <app-error
+                                [control]="FormUpdate.controls.MatKhau"
+                                [control-name]="'Mật khẩu'"
+                            >
+                            </app-error>
+                            <input  type="password" 
+                                    [(ngModel)]="nguoiDung.MatKhau" 
+                                    placeholder="Mật khẩu..."
+                                    formControlName="MatKhau"
+                            >
+                        </div>
+                        <div class="input-text email" style="z-index: 4">
+                            <app-error
+                                [control]="FormUpdate.controls.Email"
+                                [control-name]="'Email'"
+                            >
+                            </app-error>
+                            <input  type="text" 
+                                    [(ngModel)]="nguoiDung.Email" 
+                                    placeholder="Email..."
+                                    formControlName="Email"
+                            >
+                        </div>
+                        <div class="input-text phone" style="z-index: 3">
+                            <app-error
+                                [control]="FormUpdate.controls.SoDT"
+                                [control-name]="'Số điện thoại'"
+                            >
+                            </app-error>
+                            <input  type="text" 
+                                    [(ngModel)]="nguoiDung.SoDT" 
+                                    placeholder="Số điện thoại..."
+                                    formControlName="SoDT"
+                            >
+                        </div>
+                    </div>
+                    <div class="input-but">
+                        <input  type="text" 
+                                class="modify-user-hide" 
+                                value="ĐÓNG LẠI"
+                                (click)='showChange()'
+                                 >
+                        <input type="submit" value="LƯU LẠI">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

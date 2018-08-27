@@ -1,0 +1,501 @@
+
+
+#container {
+		min-height:100%;
+		position:relative;
+	}
+#body {
+    /*padding:10px;*/
+    padding-bottom:277px;	/* Height of the footer */
+}
+
+.banner{
+    height: 80px;
+    width: 100%;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 94px;
+    margin: 0;
+    line-height: 19px;
+    font-size: 10px;
+    text-align: center;
+
+}
+.footer a{
+    text-decoration: none;
+}
+.footer a:link {color:#686868;}
+.footer a:visited {color:#686868;}   visited link
+.footer a:hover {color:#686868;}   mouse over link
+.footer a:active {color:#686868;}   selected link
+
+
+table {
+    width: 100%;
+}
+
+.block_content{
+    margin: 0 auto;
+    max-width: 866px;
+    width: 700px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.block_content_nt{
+    margin: 0 auto;
+    max-width: 730px;
+    width: 863px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.block_content_card{
+    margin: 0 auto;
+    max-width: 430px;
+    width: 863px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.cancel_but{
+    /*float: right;*/
+    color: #686868;
+    margin-top:10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.cancel_but a:link {color:#686868;}
+.cancel_but a:visited {color:#686868;}  /* visited link */
+.cancel_but a:hover {color:#686868;}  /* mouse over link */
+.cancel_but a:active {color:#686868;}  /* selected link */
+
+.link_support a{
+    text-decoration: none;
+    font-size: 12px;
+    color: #006aad;
+    padding-left: 5px;
+}
+
+
+.payment_input{
+
+    height: 24px !important;
+    font-size: 12px !important;
+    padding: 2px 0 0 7px !important;
+    font-family: Helvetica !important;
+    /*color: #000000 !important;*/
+}
+
+.payment_input_select{
+    
+    height: 24px !important;
+    font-size: 12px !important;
+    padding: 2px 0 0 7px !important;
+    font-family: Helvetica !important;
+    /*color: #000000 !important;*/
+}
+
+
+
+
+
+.icon_input{
+    position: absolute;top: 12px;left: 28px;opacity: 0;visibility: hidden;
+}
+
+.ei_sp{
+    /*margin-top: 20px;*/
+}
+
+.ei_sp_last{
+    /*margin-top: 20px;*/
+    /*margin-bottom: 10px;*/
+}
+
+.ei_sp_line{
+    margin: 5px 0 5px 0;
+}
+
+@media(max-width:400px){
+    .payment_input{
+        height: 39px !important;
+        font-size: 18px !important;
+        padding: 2px 0 0 11px !important;
+        font-family: Helvetica !important;
+        /*color: #000000 !important;*/
+
+    }
+
+
+    .payment_input_select{
+        height: 39px !important;
+        font-size: 18px !important;
+        padding: 2px 0 0 11px !important;
+        font-family: Helvetica !important;
+        /*color: #000000 !important;*/
+    }
+
+    .sub_label{
+        display: none;
+    }
+
+    .sub_container{
+        max-width: 280px !important;
+        padding-left: 0%;
+        padding-right: 0%;
+        font-size: 18px !important;
+    }
+
+    .icon_input{
+        position: absolute;top: 12px;left: 28px;opacity: 0.3;visibility: visible;
+    }
+
+    .title_intro{
+        display: none;
+    }
+    .box_boder{
+        /*margin: 20px auto;*/
+        border: solid 1px #c4c4c4;
+        /*width: 400px;*/
+        padding-left: 1%;
+        padding-right: 1%;
+        /*margin-top: 10px;*/
+        margin-left: 1.5%;
+        margin-right: 1.5%;
+    }
+    /*.box_intro{*/
+        /*background-color: rgba(79, 157, 81, 1);width: 100%;height: 40px;*/
+        /*display: none !important;*/
+    /*}*/
+
+    .bt-main{
+        font-size: 18px !important;
+    }
+
+    .csclagi{
+        display: none;
+    }
+    .cotnam{
+        padding-right: 15px !important; padding-left: 15px !important;
+    }
+    .thu_nho{
+        padding-left: 15px !important;
+    }
+    .chieurong{
+        /*width: 398px !important;*/
+        padding-left: 35%;
+        padding-right: 35%;
+        text-align: right;
+        /*padding: 0 !important;*/
+    }
+    .pad_input{
+        padding-left: 42px !important;
+    }
+    .hide_small{
+        display: none;
+    }
+    .but_thanh_toan{
+        width: 100%;display: block;
+    }
+    .space_row {
+        padding: 5px 0 5px 0;
+    }
+    .logo_card{
+        width: 45px;
+        padding-left: 0px;
+    }
+    .logo_banner{
+        height: 70px;
+    }
+    .logo_secure{
+        width: 250px;
+    }
+    .text_error{
+        font-size: 18px;
+        color:red;
+        padding-top:0px;
+    }
+
+    .ei_sp{
+        margin-top: 0px!important;
+    }
+
+    .ei_main {
+        margin: 0;
+        /*border-top: #c9c9c9 solid 1px;*/
+        padding: 0 0 75px;
+    }
+
+    .ei_logo{
+        height: 80px;display: table-cell;vertical-align: bottom;
+    }
+
+}
+@media (max-width: 992px) and (min-width: 400px) {
+    .payment_input{
+        height: 47px !important;
+        font-size: 25px !important;
+        padding: 2px 0 0 11px !important;
+        font-family: Helvetica !important;
+        /*color: #000000 !important;*/
+
+    }
+
+
+    .payment_input_select{
+        height: 47px !important;
+        font-size: 25px !important;
+        padding: 2px 0 0 11px !important;
+        font-family: Helvetica !important;
+        /*color: #000000 !important;*/
+    }
+
+    .sub_label{
+        display: none;
+    }
+
+    .sub_container{
+        max-width: 650px !important;
+        padding-left: 5%;
+        padding-right: 5%;
+        font-size: 25px !important;
+    }
+
+    .icon_input{
+        position: absolute;top: 12px;left: 28px;opacity: 0.3;visibility: visible;
+    }
+
+    .title_intro{
+        display: none;
+    }
+    .box_boder{
+        /*margin: 20px auto;*/
+        border: solid 1px #c4c4c4;
+        /*width: 400px;*/
+        padding-left: 2%;
+        padding-right: 2%;
+        /*margin-top: 20px;*/
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    /*.box_intro{*/
+        /*background-color: rgba(79, 157, 81, 1);width: 100%;height: 40px;*/
+        /*display: none !important;*/
+    /*}*/
+
+    .bt-main{
+        font-size: 25px !important;
+    }
+
+    .csclagi{
+        display: none;
+    }
+    .cotnam{
+        padding-right: 15px !important; padding-left: 15px !important;
+    }
+    .thu_nho{
+        padding-left: 15px !important;
+    }
+    .chieurong{
+        /*width: 398px !important;*/
+        padding-left: 35%;
+        padding-right: 35%;
+        text-align: right;
+        /*padding: 0 !important;*/
+    }
+    .pad_input{
+        padding-left: 56px !important;
+    }
+    .hide_small{
+        display: none;
+    }
+    .but_thanh_toan{
+        width: 100%;display: block;
+    }
+    .space_row {
+        padding: 5px 0 5px 0;
+    }
+    .logo_banner{
+        height: 80px;
+    }
+    .logo_secure{
+        width: 330px;
+    }
+    .text_error{
+        font-size: 25px;
+        color:red;
+        padding-top:0px;
+    }
+
+    .ei_main {
+        margin: 0;
+        /*border-top: #c9c9c9 solid 1px;*/
+        padding: 0 0 75px;
+    }
+
+    .ei_logo{
+        height: 100px;display: table-cell;vertical-align: bottom;
+    }
+
+}
+@media(min-width:992px){
+    /*.box_intro{*/
+        /*display: none;*/
+    /*}*/
+    .csclagi{
+        display: block;
+    }
+    .cotnam{
+        padding-right: 15px !important; padding-left: 0px !important;
+    }
+    .thu_nho{
+        padding-left: 0 !important;
+    }
+    .chieurong{
+        width: 485px !important;text-align: right;
+    }
+    .date_csc{
+        width: 85px !important;
+    }
+    .quocgia{
+        width: 170px !important;
+    }
+    .lb_diachi{
+        font-weight: bold;
+    }
+    .bt-main{
+        font-size: 12px;
+        width: 150px !important;
+    }
+    .sub_container{
+        width: 480px !important;
+        /*font-size: 12px !important;*/
+    }
+    .title_intro{
+        padding-top: 10px;font-weight: bold;font-style: italic;
+    }
+    .sub_label{
+        padding-top: 5px;
+        color: #000000;
+    }
+    .hide_large{
+        display: none;
+    }
+    .but_thanh_toan{
+        width: 200px;
+    }
+    .space_row {
+        padding: 3px 0 3px 0;
+    }
+    .logo_banner{
+        height: 80px;
+    }
+    .logo_secure{
+        width: 330px;
+    }
+    .pad_input{
+        padding-left: 7px !important;
+    }
+    .rm_pad_right_large{
+        padding-right: 0 !important;
+    }
+    .text_error{
+        font-size: 12px;
+        color:red;
+        padding-top:0px;
+    }
+
+    .ei_main {
+        margin: 0;
+        border-top: #c9c9c9 solid 1px;
+        padding: 0 0 75px;
+    }
+
+    .ei_logo{
+        height: 100px;display: table-cell;vertical-align: bottom;
+    }
+
+}
+/*@media(min-width:1200px){*/
+
+/*}*/
+
+.main_value {
+    font-weight: bold;
+    color: #015272;
+}
+
+
+
+.ei_banner{
+    background-color: #ffffff;
+}
+
+
+
+
+.ei_order{
+    margin-top: 10px;margin-bottom: 5px;
+}
+
+
+
+.ei_card{
+    height: 80px;
+}
+
+.no_pad_right{
+    padding-right: 0;
+}
+
+.ei_star_color{
+    color: red;
+}
+
+.ei_div_pay{
+    padding-top: 20px;text-align: right;
+}
+
+.ei_div_hotline{
+    padding: 0px 0 10px 0;margin-bottom: 10px;
+}
+
+.ei_div_cancel{
+    padding: 10px 0 0px 0;margin-bottom: 10px;
+}
+
+.ei_div2_cancel{
+    text-align: right;
+}
+
+.div_clear{
+    clear: both;height: 20px;
+}
+
+.img_secure{
+    display: inline-block;background-color:white;height: 47px;
+}
+
+.div_sp{
+    height: 10px;
+}
+
+.div_sp_5{
+    height: 10px;
+}
+
+.div_url{
+    vertical-align: bottom;height: 47px;display: block;background-color: #F5F5F5;
+}
+
+.no_mar{
+    margin-bottom: 0px;
+}

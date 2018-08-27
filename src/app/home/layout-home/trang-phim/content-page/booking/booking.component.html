@@ -1,0 +1,815 @@
+
+<div class="section-order" style="height: 4000px" [ngStyle]="{'display':showEnd ? 'none':'block'}">
+  <a class="close-order" [routerLink]="['../../../home']"></a>
+  <div class="order-title">
+    <div class="order-wrap">
+      <div class="order-pic"><img src="{{hinhAnh}}"></div>
+      <div class="order-overview">
+        <h2><strong>Tên phim</strong><br><span>{{tenPhim}}</span></h2>
+        <ul class="about-ticket">
+          <li>
+            <p class="caption">Chọn suất chiếu</p>
+            <p class="value"> {{gioChieu}} </p>
+          </li>
+          <li>
+            <p class="caption">Ngày</p>
+            <p class="value">{{ngayChieu}}</p>
+          </li>
+          <li>
+            <p class="caption">Số lượng</p>
+            <p class="value"><span>{{sove}}</span><sub>vé</sub></p>
+          </li>
+          <li>
+            <p class="caption">Tổng số tiền</p>
+            <p class="value"><span>{{fulltotal}}</span><sup>đ</sup></p>
+          </li>
+        </ul>
+        <ul class="about-seat">
+          <li>Số ghế</li>
+          <li class="seat-number" *ngFor="let item of danhSachVe">
+            <span>{{item.innerHTML}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="order-content" style="display: block;height: auto;">
+    <span class="overlay-cons" *ngIf="showcombo == true" (click)="closeCombo()"></span>
+    <div class="cinema-name"><h2>Trí Lực Siêu Phàm (C16)</h2></div>
+    <!-- Ticket part BOOk1 -->
+    <div class="ticket-content" [ngStyle]="{ 'display' : showTicket == false ? 'block' : 'none' }">
+      <div class="ticket-wrap">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Loại vé</th>
+                <th>Số lượng</th>
+                <th>Giá (VNĐ)</th>
+                <th>Tổng tiền (VNĐ)</th>
+              </tr>
+            </thead>
+            <tbody id="content-price">
+              <tr data-seatstyle-id="29">
+                <td>Người Lớn (ĐƠN)</td>
+                <td class="ticket-num"><a class="minus" (click)="minus1()">-</a>
+                  <input type="text" readonly="" value="{{ve1}}"><a class="add" (click)="add1()">+</a></td>
+                <td class="ticket-price">75000<sup>đ</sup></td>
+                <td class="ticket-total"><span>{{total1}}</span><sup>đ</sup></td>
+              </tr>
+              <tr data-seatstyle-id="30">
+                <td>Người Lớn (ĐÔI)</td>
+                <td class="ticket-num"><a class="minus" (click)="minus2()">-</a>
+                  <input type="text" value="{{ve2}}" readonly=""><a class="add" (click)="add2()">+</a></td>
+                <td class="ticket-price" data-price="95000">120000<sup>đ</sup></td>
+                <td class="ticket-total" data-total="0"><span>{{total2}}</span><sup>đ</sup></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="ticket-cal">
+          <li class="total-ticket-num">Số lượng:<span>{{sove}}</span>
+            <mark>vé</mark>
+          </li>
+          <li class="total-ticket-amount">Tổng số tiền:<span>{{fulltotal}}</span><sup>đ</sup></li>
+        </ul>
+        <div class="ticket-request">
+          <p>Vui lòng xuất trình thẻ sinh viên, CMND có dán ảnh khi nhận vé, nếu không quý khách vui lòng thanh toán giá vé
+            <br>Người Lớn theo quy định / Thành tiền</p>
+        </div>
+        <div class="input-but">
+          <input type="button" value="Quay lại" id="ticket-back" [routerLink]="['../../selected',maPhim]">
+          <input type="button" value="Chọn ghế" [ngStyle]='{ "opacity" : fulltotal > 0 ? "1":"0.5" ,"pointer-events" : fulltotal > 0 ? "auto" : "none" }' id="ticket-next" (click)="DatGhe()">
+        </div>
+      </div>
+    </div>
+    <!-- cinema part Book2 -->
+    <div id="cinema-content" class="cinema-content" [ngStyle]="{ 'display' : showGhe ? 'block' : 'none' }">
+      <div class="cinema-name">
+        <h2>{{tenPhim}}</h2></div>
+      <div class="cinema-wrap">
+        <h3 class="cinema-title">Màn hình</h3>
+        <div class="cinema-seat" data-room-name="06" style="display: block;">
+          <div class="tbl-wrap">
+            <table>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" *ngFor="let ghe of danhSachGhe | slice:0:1" (click)="choose(ghe.MaGhe ,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:1:10" (click)="choose(ghe.MaGhe ,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" *ngFor="let ghe of danhSachGhe | slice:10:11" (click)="choose(ghe.MaGhe ,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:11:20" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" *ngFor="let ghe of danhSachGhe | slice:20:21" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:21:30" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" ngFor="let ghe of danhSachGhe | slice:30:31" (click)="choose(ghe.MaGhe,$event)">D31</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:31:40" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" *ngFor="let ghe of danhSachGhe | slice:40:41" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:41:50" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="couple" *ngFor="let ghe of danhSachGhe | slice:50:51" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                  <td class="road" colspan="2" style="background-color: #c6c6c6;color: #fff;font-weight: normal;font-size: 16px;">V</td>
+                  <td class="single " *ngFor="let ghe of danhSachGhe | slice:51:60" (click)="choose(ghe.MaGhe,$event)" [ngClass]="{'busy': ghe.DaDat ==true}">{{ghe.MaGhe}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ul class="cinema-note">
+          <li class="single">Ghế thường</li>
+          <li class="couple">Ghế đôi</li>
+          <li class="choosingdefaul">Ghế đang chọn</li>
+          <li class="busy">Ghế đã chọn</li>
+          <li class="road">Lối đi</li>
+        </ul>
+        <div class="cons-but">
+          <div class="cons-icon show"></div>
+          <div class="cons-total">
+            <div class="cons-value"><span></span><sup>đ</sup></div>
+            <div class="cons-text"></div>
+          </div>
+        </div>
+        <div class="cinema-btn">
+          <input type="button" id="cinema-back" value="Quay lại" (click)="goBack()">
+          <input type="button" id="cons-chose" class="cons-chose" value="Chọn Đồ Ăn" (click)="combo()">
+          <input type="button" id="cinema-next" value="Thanh toán" [ngStyle]='{ "opacity" : showThanhToan ? "1":"0.5" ,"pointer-events" : showThanhToan ? "auto" : "none" }' (click)="datVe()">
+        </div>
+      </div>
+    </div>
+    <!-- Combo -->
+    <div class="cons-content" [ngClass]="{'show': showcombo == true}">
+      <div class="cons-box">
+        <ul>
+          <li data-group="76">
+            <h2>Bắp Rang</h2>
+            <div class="combo-item">
+              <div class="combo-text">
+                <h3>Bắp rang 60oz - Phô Mai</h3>
+                <p>Bắp rang 60oz - Phô Mai</p>
+                <div class="combo-price">giá:<span class="text-price">55000</span><sup>đ</sup></div>
+              </div>
+              <div class="combo-input"><a class="cmb-minus" (click)="comboMinus1()">-</a>
+                <input readonly="" type="text" value='{{combo1}}'><a (click)="comboAdd1()" class="cmb-add">+</a></div>
+              <div class="combo-total">
+                <div class="combo-total-outer"><span>{{comboTotal1}}</span><sup>đ</sup></div>
+              </div>
+            </div>
+          </li>
+          <li data-group="98">
+            <h2>Combo Tết</h2>
+            <div class="combo-item">
+              <div class="combo-text">
+                <h3>Combo 1 HCM</h3>
+                <p>1 Coke 22oz + 1 Poca Partyz + 1 Bắp rang 60oz </p>
+                <div class="combo-price">giá:<span class="text-price">79000</span><sup>đ</sup></div>
+              </div>
+              <div class="combo-input"><a (click)="comboMinus2()" class="cmb-minus">-</a>
+                <input readonly="" type="text" value='{{combo2}}'><a (click)="comboAdd2()" class="cmb-add">+</a></div>
+              <div class="combo-total">
+                <div class="combo-total-outer"><span>{{comboTotal2}}</span><sup>đ</sup></div>
+              </div>
+            </div>
+          </li>
+          <li data-group="75">
+            <h2>Nước Lon/Chai</h2>
+            <div class="combo-item">
+              <div class="combo-text">
+                <h3>Nước Suối Dasani 500ml</h3>
+                <p>Nước Suối Dasani 500ml</p>
+                <div class="combo-price">giá:<span class="text-price">16000</span><sup>đ</sup></div>
+              </div>
+              <div class="combo-input"><a (click)="comboMinus3()" class="cmb-minus">-</a>
+                <input readonly="" type="text" value='{{combo3}}'><a (click)="comboAdd3()" class="cmb-add">+</a></div>
+              <div class="combo-total">
+                <div class="combo-total-outer"><span>{{comboTotal3}}</span><sup>đ</sup></div>
+              </div>
+            </div>
+          </li>
+          <li data-group="77">
+            <h2>Nước ngọt Ly</h2>
+            <div class="combo-item">
+              <div class="combo-text">
+                <h3>Coke 22oz</h3>
+                <p>Coke 22oz</p>
+                <div class="combo-price">giá:<span class="text-price">25000</span><sup>đ</sup></div>
+              </div>
+              <div class="combo-input"><a (click)="comboMinus4()" class="cmb-minus">-</a>
+                <input readonly="" type="text" value='{{combo4}}'><a (click)="comboAdd4()" class="cmb-add">+</a></div>
+              <div class="combo-total">
+                <div class="combo-total-outer"><span>{{comboTotal4}}</span><sup>đ</sup></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="cons-input">
+        <input type="button" class="cons-cancel" id="cons-cancel" value="Hủy" (click)="closeCombo()">
+        <input type="button" class="cons-ok" id="cons-ok" value="Đồng ý" (click)="TotalCombo()">
+      </div>
+      <div class="cons-top">
+        <div class="cons-icon show" (click)="closeCombo()"></div>
+        <div class="cons-total" style="display:inline-block;">
+          <div class="cons-value">
+            <span>{{totalCombo}}</span><sup>đ</sup>
+          </div>
+          <div class="cons-text">
+            <ul>
+              <li *ngIf="combo1 > 0">{{combo1}}x{{txtCombo1}}</li>
+              <li *ngIf="combo2 > 0">{{combo2}}x{{txtCombo2}}</li>
+              <li *ngIf="combo3 > 0">{{combo3}}x{{txtCombo3}}</li>
+              <li *ngIf="combo4 > 0">{{combo4}}x{{txtCombo4}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- filnal ticket-->
+    <div class="final-content" style="display: block;">
+      <!--confirm-->
+      <div class="final-confirm" style="display: block; height:auto;overflow-y: auto; " *ngIf="showMenu == true">
+        <p>Cảm ơn quý khách đã đến với <strong>CyberFilm</strong> !
+          <br> Xin quý khách vui lòng kiểm tra lại thông tin đặt vé </p>
+        <div class="confirm-box">
+          <div class="confirm-cus">
+            <p>Họ tên: <strong>{{user}}</strong></p>
+            <p>Email: <strong>{{email}}</strong></p>
+            <p>Phone: <strong>{{soDT}}</strong></p>
+          </div>
+          <div class="confirm-film">
+            <div class="confirm-film-pic"><img src="{{hinhAnh}}"></div>
+            <div class="confirm-film-text">
+              <h3>{{tenPhim}}</h3>
+              <p>Ngày chiếu: <strong>{{ngayChieu}}</strong></p>
+              <p>Suất chiếu: <strong>{{gioChieu}}</strong></p>
+              <p><span class="icon-"></span></p>
+            </div>
+          </div>
+          <div class="confirm-ticket">
+            <div class="confirm-mark">Ghế</div>
+            <div class="confirm-text">
+              <ul>
+                <li *ngFor="let item of danhSachVe">
+                  <div class="confirm-mark">{{item.innerHTML}}</div>
+                  <div class="confirm-value"><span>75000</span><sup>đ</sup></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="confirm-cons">
+            <div class="confirm-mark">Combo</div>
+            <div class="confirm-text">
+              <ul>
+                <li *ngIf="combo1 > 0">
+                  <div class="confirm-mark">{{combo1}} x {{txtCombo1}}</div>
+                  <div class="confirm-value"><span>{{comboTotal1}}</span><sup>đ</sup></div>
+                </li>
+                <li *ngIf="combo2 > 0">
+                  <div class="confirm-mark">{{combo2}} x {{txtCombo2}}</div>
+                  <div class="confirm-value"><span>{{comboTotal2}}</span><sup>đ</sup></div>
+                </li>
+                <li *ngIf="combo3 > 0">
+                  <div class="confirm-mark">{{combo3}} x {{txtCombo3}}</div>
+                  <div class="confirm-value"><span>{{comboTotal3}}</span><sup>đ</sup></div>
+                </li>
+                <li *ngIf="combo4 > 0">
+                  <div class="confirm-mark">{{combo4}} x {{txtCombo4}}</div>
+                  <div class="confirm-value"><span>{{comboTotal4}}</span><sup>đ</sup></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="confirm-total">
+            <div class="confirm-mark">Tổng tiền</div>
+            <div class="confirm-value"><span>{{fulltotal}}</span><sup>đ</sup></div>
+          </div>
+          <div class="cons-print"><a href="javascript:void(0);" onclick="PrintBill()">Print</a> </div>
+        </div>
+        <div class="input-but">
+            <input type="button" class="cancel" value="Quay lại" id="payment-back" (click)="backBooking()" >
+            <input type="button" class="ok" value="Thanh toán" id="payment-next"  (click)="goDieuKhoan()" >
+            <span></span>
+          </div>
+      </div>
+      <!--confirm-->
+      <div class="final-form" *ngIf="showDieuKhoan == true">
+        <form id="final">
+          <div class="input-text">
+            <h2>Điều khoản chung</h2>
+            <div class="terms_condition_paypal">
+              <p>&nbsp;</p>
+              <div>
+                <div>
+                  <ul>
+                    <li>Việc bạn sử dụng website này đồng nghĩa với việc bạn đồng ý với những thỏa thuận dưới đây.</li>
+                    <li>Nếu bạn không đồng ý, xin vui lòng không sử dụng website.</li>
+                  </ul>
+                </div>
+                <div><strong>1. Trách nhiệm của người sử dụng:</strong>
+                  <p>Khi truy cập vào trang web này, bạn đồng ý chấp nhận mọi rủi ro. Cinestar&nbsp;và các bên đối tác khác không chịu trách nhiệm về bất kỳ tổn thất nào do những hậu quả trực tiếp, tình cờ hay gián tiếp; những thất thoát, chi phí (bao gồm chi phí pháp lý, chi phí tư vấn hoặc các khoản chi tiêu khác) có thể phát sinh trực tiếp hoặc gián tiếp do việc truy cập trang web hoặc khi tải dữ liệu về máy; những tổn hại gặp phải do virus, hành động phá hoại trực tiếp hay gián tiếp của hệ thống máy tính khác, đường dây điện thoại, phần cứng, phần mềm, lỗi chương trình, hoặc bất kì các lỗi nào khác; đường truyền dẫn của máy tính hoặc nối kết mạng bị chậm…</p>
+                </div>
+                <div><strong>2. Về nội dung trên trang web:</strong>
+                  <p>Tất cả những thông tin ở đây được cung cấp cho bạn một cách trung thực như bản thân sự việc.&nbsp;Cinestar&nbsp;và các bên liên quan không bảo đảm, hay có bất kỳ tuyên bố nào liên quan đến tính chính xác, tin cậy của việc sử dụng hay kết quả của việc sử dụng nội dung trên trang web này. Nột dung trên website được cung cấp vì lợi ích của cộng đồng và có tính phi thương mại. Các cá nhân và tổ chức không được phếp sử dụng nội dung trên website này với mục đích thương mại mà không có sự ưng thuận của&nbsp;Cinestar&nbsp;bằng văn bản. Mặc dù&nbsp;Cinestar&nbsp;luôn cố gắng cập nhật thường xuyên các nội dung tại trang web, nhưng chúng tôi không bảo đảm rằng các thông tin đó là mới nhất, chính xác hay đầy đủ. Tất cả các nội dung website có thể được thay đổi bất kỳ lúc nào.</p>
+                </div>
+                <div><strong>3. Về bản quyền:</strong>
+                  <p>Cinestar&nbsp;là chủ bản quyền của trang web này. Việc chỉnh sửa trang, nội dung, và sắp xếp thuộc về thẩm quyền của&nbsp;Cinestar. Sự chỉnh sửa, thay đổi, phân phối hoặc tái sử dụng những nội dung trong trang này vì bất kì mục đích nào khác được xem như vi phạm quyền lợi hợp pháp của&nbsp;Cinestar.</p>
+                </div>
+                <div><strong>4. Về việc sử dụng thông tin:</strong>
+                  <p>Chúng tôi sẽ không sử dụng thông tin cá nhân của bạn trên website này nếu không được phép. Nếu bạn đồng ý cung cấp thông tin cá nhân, bạn sẽ được bảo vệ. Thông tin của bạn sẽ được sử dụng với mục đích, liên lạc với bạn để thông báo các thông tin cập nhật của&nbsp;Cinestar&nbsp;như lịch chiếu phim, khuyến mại qua email hoặc bưu điện. Thông tin cá nhân của bạn sẽ không được gửi cho bất kỳ ai sử dụng ngoài trang web&nbsp;Cinestar, ngoại trừ những mở rộng cần thiết để bạn có thể tham gia vào trang web (những nhà cung cấp dịch vụ, đối tác, các công ty quảng cáo) và yêu cầu cung cấp bởi luật pháp. Nếu chúng tôi chia sẻ thông tin cá nhân của bạn cho các nhà cung cấp dịch vụ, công ty quảng cáo, các công ty đối tác liên quan, thì chúng tôi cũng yêu cầu họ bảo vệ thông tin cá nhân của bạn như cách chúng tôi thực hiện.</p>
+                </div>
+                <div><strong>5. Vể việc tải dữ liệu:</strong>
+                  <p>Nếu bạn tải về máy những phần mềm từ trang này, thì phần mềm và các dữ liệu tải sẽ thuộc bản quyền của&nbsp;Cinestar&nbsp;và cho phép bạn sử dụng. Bạn không được sở hữu những phầm mềm đã tải và&nbsp;Cinestar&nbsp;không nhượng quyền cho bạn. Bạn cũng không được phép bán, phân phối lại, hay bẻ khóa phần mềm…</p>
+                </div>
+                <div><strong>6. Thay đổi nội dung:</strong>
+                  <p>Cinestar&nbsp;giữ quyền thay đổi, chỉnh sửa và loại bỏ những thông tin hợp pháp vào bất kỳ thời điểm nào vì bất kỳ lý do nào.</p>
+                </div>
+                <div><strong>7. Liên kết với các trang khác:</strong>
+                  <p>Mặc dù trang web này có thể được liên kết với những trang khác,&nbsp;Cinestar&nbsp;không trực tiếp hoặc gián tiếp tán thành, tổ chức, tài trợ, đứng sau hoặc sát nhập với những trang đó, trừ phi điều này được nêu ra rõ ràng. Khi truy cập vào trang web bạn phải hiểu và chấp nhận rằng&nbsp;Cinestar&nbsp;không thể kiểm soát tất cả những trang liên kết với trang&nbsp;Cinestar&nbsp;và cũng không chịu trách nhiệm cho nội dung của những trang liên kết.</p>
+                </div>
+                <div><strong>8. Đưa thông tin lên trang web:</strong>
+                  <p>Bạn không được đưa lên, hoặc chuyển tải lên trang web tất cả những hình ảnh, từ ngữ khiêu dâm, thô tục, xúc phạm, phỉ báng, bôi nhọ, đe dọa, những thông tin không hợp pháp hoặc những thông tin có thể đưa đến việc vi phạm pháp luật, trách nhiệm pháp lý.&nbsp;Cinestar&nbsp;và tất cả các bên có liên quan đến việc xây dựng và quản lý trang web không chịu trách nhiệm hoặc có nghĩa vụ pháp lý đối với những phát sinh từ nội dung do bạn tải lên trang web.</p>
+                </div>
+                <div><strong>9. Luật áp dụng:</strong>
+                  <p>Mọi hoạt động phát sinh từ trang web có thể sẽ được phân tích và đánh giá theo luật pháp Việt Nam và toà án Tp. Hồ Chí Minh. Và bạn phải đồng ý tuân theo các điều khoản riêng của các toà án này.</p>
+                </div>
+              </div>
+            </div>
+            <div class="payment_check">
+              <div>
+                <input class="check_terms_condition" type="checkbox" value="I agree with terms and conditions of online tickets getting"><span class="check_terms_condition_icon"></span>I agree with terms and conditions of online tickets getting</div>
+              <div>
+                <input class="check_terms_condition_1" type="checkbox" value=""><span class="check_terms_condition_icon"></span>Tôi bảo đảm mua vé xem phim này theo đúng độ tuổi quy định</div>
+            </div>
+            <div class="payment_method">
+              <div>
+                <input type="radio" class="payment_method_radio" value="qt" name="payment_method"><span class="payment_method_icon"></span> Quốc tế</div>
+              <div>
+                <input type="radio" class="payment_method_radio" value="nd" name="payment_method"><span class="payment_method_icon"></span> Nội địa</div>
+            </div>
+          </div>
+          <div class="input-but">
+            <input type="button" class="cancel" value="Quay lại" id="payment-back" (click)="backMenu()" >
+            <input type="button" class="ok" value="Thanh toán" id="payment-next" (click)="thanhToan()" >
+            <span></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thanh Toan -->
+<div class="container-fluid ei_main" style="background: white; margin-top: 80px; height: 600px " [ngStyle]="{'display':showEnd ? 'block':'none'}">
+  <div class="box_boder">
+    <div class="sub_container container ei_order">
+      <div class="row ei_sp">
+        <div class="col-md-3 hide_small no_pad_right mb-3">Tên đơn vị:</div>
+        <div class="col-xs-12 col-md-8 main_value thu_nho">CYBERFILM</div>
+      </div>
+      <div class="row hide_small ei_sp mb-3">
+        <div class="col-xs-4 col-md-3">Đơn hàng:</div>
+        <div class="col-xs-8 col-md-8 main_value thu_nho">7527534</div>
+      </div>
+      <div class="row hide_small ei_sp mb-3">
+        <div class="col-xs-4 col-md-3">Tài Khoản:</div>
+        <div class="col-xs-8 col-md-8 main_value thu_nho" style="color: #c55a11;">{{user}}</div>
+      </div>
+      <div class="row hide_small ei_sp mb-3">
+        <div class="col-xs-4 col-md-3">Số tiền:</div>
+        <div class="col-xs-8 col-md-8 main_value thu_nho" style="color: #c55a11;">{{fulltotal}} VND</div>
+      </div>
+
+    </div>
+    <div align="center" class="text_error">
+    </div>
+    <div class="container sub_container ei_card">
+      <p class="title_intro">
+        <span class="fa fa-lock fa-lg"></span> Mời nhập thông tin thẻ và bấm "Thanh toán" để tiếp tục.</p>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          Số thẻ:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <span class="fa fa-credit-card fa-lg icon_input"></span>
+          <input id="cardno" name="requestDTO.vpc_CardNum" type="text" class="form-control payment_input pad_input" value="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          Loại thẻ:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <img class="logo_card" src="../../../../../../assets/img/VS.png" alt="">
+          <img class="logo_card" src="../../../../../../assets/img/MC.png" alt="">
+          <img class="logo_card" src="../../../../../../assets/img/JC.png" alt="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label no_pad_right">
+          Ngày hết hạn:
+        </div>
+        <div class="col-xs-6 col-md-3 thu_nho date_csc">
+          <!--<div class="form-inline">-->
+          <select id="slMonth" class="form-control payment_input_select" name="mm">
+            <option value="00">Tháng</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+        <div class="col-xs-6 col-md-3 cotnam date_csc">
+          <select class="form-control payment_input_select" name="yy">
+            <option value="0000">Năm</option>
+            <option value="2018">
+              2018</option>
+            <option value="2019">
+              2019</option>
+            <option value="2020">
+              2020</option>
+            <option value="2021">
+              2021</option>
+            <option value="2022">
+              2022</option>
+            <option value="2023">
+              2023</option>
+            <option value="2024">
+              2024</option>
+            <option value="2025">
+              2025</option>
+            <option value="2026">
+              2026</option>
+            <option value="2027">
+              2027</option>
+            <option value="2028">
+              2028</option>
+            <option value="2029">
+              2029</option>
+            <option value="2030">
+              2030</option>
+            <option value="2031">
+              2031</option>
+            <option value="2032">
+              2032</option>
+            <option value="2033">
+              2033</option>
+            <option value="2034">
+              2034</option>
+            <option value="2035">
+              2035</option>
+            <option value="2036">
+              2036</option>
+            <option value="2037">
+              2037</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          CSC:
+        </div>
+        <div class="col-md-3 thu_nho date_csc">
+          <span class="fa fa-lock fa-lg icon_input"></span>
+          <input id="csc" name="requestDTO.vpc_CardSecurityCode" type="text" class="form-control payment_input pad_input" value="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-12 lb_diachi">
+          Địa chỉ hóa đơn
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          Địa chỉ<span style="color: red;">*</span>:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <input type="text" name="requestDTO.vpc_AVS_Street01" id="diachi" class="form-control payment_input" size="45" value="" maxlength="128">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label rm_pad_right_large">
+          Quận/Huyện<span style="color: red;">*</span>:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <input type="text" id="thanhpho" name="requestDTO.vpc_AVS_City" class="form-control payment_input" size="45" maxlength="128" value="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label no_pad_right">
+          Tỉnh/Thành phố:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <input type="text" id="quanhuyen" name="requestDTO.vpc_AVS_StateProv" class="form-control payment_input" size="45" maxlength="20" value="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          Mã bưu điện:
+        </div>
+        <div class="col-md-9 thu_nho">
+          <input type="text" id="mabuudien" name="requestDTO.vpc_AVS_PostCode" class="form-control payment_input" size="45" maxlength="9" value="">
+        </div>
+      </div>
+      <div class="row space_row">
+        <div class="col-md-3 sub_label">
+          Quốc gia<span class="ei_star_color">*</span>:
+        </div>
+        <div class="col-md-3 col-xs-12 thu_nho quocgia">
+          <select name="requestDTO.vpc_AVS_Country" class="form-control payment_input_select">
+            <option value="">Chọn quốc gia*</option>
+            <option value="VN">Vietnam</option>
+            <option value="AF">Afghanistan</option>
+            <option value="AL">Albania</option>
+            <option value="DZ">Algeria</option>
+            <option value="AS">American Samoa</option>
+            <option value="AD">Andorra</option>
+            <option value="AO">Angola</option>
+            <option value="AI">Anguilla</option>
+            <option value="AQ">Antarctica</option>
+            <option value="AG">Antigua and Barbuda</option>
+            <option value="AR">Argentina</option>
+            <option value="AM">Armenia</option>
+            <option value="AW">Aruba</option>
+            <option value="AU">Australia</option>
+            <option value="AT">Austria</option>
+            <option value="AZ">Azerbaijan</option>
+            <option value="BS">Bahamas</option>
+            <option value="BH">Bahrain</option>
+            <option value="BD">Bangladesh</option>
+            <option value="BB">Barbados</option>
+            <option value="BY">Belarus</option>
+            <option value="BE">Belgium</option>
+            <option value="BZ">Belize</option>
+            <option value="BJ">Benin</option>
+            <option value="BM">Bermuda</option>
+            <option value="BT">Bhutan</option>
+            <option value="BO">Bolivia</option>
+            <option value="BA">Bosnia and Herzegovina</option>
+            <option value="BW">Botswana</option>
+            <option value="BV">Bouvet Island</option>
+            <option value="BR">Brazil</option>
+            <option value="IO">British Indian Ocean Territory</option>
+            <option value="VG">British Virgin Islands</option>
+            <option value="BN">Brunei</option>
+            <option value="BG">Bulgaria</option>
+            <option value="BF">Burkina Faso</option>
+            <option value="BI">Burundi</option>
+            <option value="KH">Cambodia</option>
+            <option value="CM">Cameroon</option>
+            <option value="CA">Canada</option>
+            <option value="CV">Cape Verde</option>
+            <option value="KY">Cayman Islands</option>
+            <option value="CF">Central African Republic</option>
+            <option value="TD">Chad</option>
+            <option value="CL">Chile</option>
+            <option value="CN">China</option>
+            <option value="CX">Christmas Island</option>
+            <option value="CC">Cocos Islands</option>
+            <option value="CO">Colombia</option>
+            <option value="KM">Comoros</option>
+            <option value="CG">Congo</option>
+            <option value="CK">Cook Islands</option>
+            <option value="CR">Costa Rica</option>
+            <option value="HR">Croatia</option>
+            <option value="CU">Cuba</option>
+            <option value="CY">Cyprus</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="CI">Côte d'Ivoire</option>
+            <option value="DK">Denmark</option>
+            <option value="DJ">Djibouti</option>
+            <option value="DM">Dominica</option>
+            <option value="DO">Dominican Republic</option>
+            <option value="EC">Ecuador</option>
+            <option value="EG">Egypt</option>
+            <option value="SV">El Salvador</option>
+            <option value="GQ">Equatorial Guinea</option>
+            <option value="ER">Eritrea</option>
+            <option value="EE">Estonia</option>
+            <option value="ET">Ethiopia</option>
+            <option value="FK">Falkland Islands</option>
+            <option value="FO">Faroe Islands</option>
+            <option value="FJ">Fiji</option>
+            <option value="FI">Finland</option>
+            <option value="FR">France</option>
+            <option value="GF">French Guiana</option>
+            <option value="PF">French Polynesia</option>
+            <option value="TF">French Southern Territories</option>
+            <option value="GA">Gabon</option>
+            <option value="GM">Gambia</option>
+            <option value="GE">Georgia</option>
+            <option value="DE">Germany</option>
+            <option value="GH">Ghana</option>
+            <option value="GI">Gibraltar</option>
+            <option value="GR">Greece</option>
+            <option value="GL">Greenland</option>
+            <option value="GD">Grenada</option>
+            <option value="GP">Guadeloupe</option>
+            <option value="GU">Guam</option>
+            <option value="GT">Guatemala</option>
+            <option value="GN">Guinea</option>
+            <option value="GW">Guinea-Bissau</option>
+            <option value="GY">Guyana</option>
+            <option value="HT">Haiti</option>
+            <option value="HM">Heard Island And McDonald Islands</option>
+            <option value="HN">Honduras</option>
+            <option value="HK">Hong Kong</option>
+            <option value="HU">Hungary</option>
+            <option value="IS">Iceland</option>
+            <option value="IN">India</option>
+            <option value="ID">Indonesia</option>
+            <option value="IR">Iran</option>
+            <option value="IQ">Iraq</option>
+            <option value="IE">Ireland</option>
+            <option value="IL">Israel</option>
+            <option value="IT">Italy</option>
+            <option value="JM">Jamaica</option>
+            <option value="JP">Japan</option>
+            <option value="JO">Jordan</option>
+            <option value="KZ">Kazakhstan</option>
+            <option value="KE">Kenya</option>
+            <option value="KI">Kiribati</option>
+            <option value="KW">Kuwait</option>
+            <option value="KG">Kyrgyzstan</option>
+            <option value="LA">Laos</option>
+            <option value="LV">Latvia</option>
+            <option value="LB">Lebanon</option>
+            <option value="LS">Lesotho</option>
+            <option value="LR">Liberia</option>
+            <option value="LY">Libya</option>
+            <option value="LI">Liechtenstein</option>
+            <option value="LT">Lithuania</option>
+            <option value="LU">Luxembourg</option>
+            <option value="MO">Macao</option>
+            <option value="MK">Macedonia</option>
+            <option value="MG">Madagascar</option>
+            <option value="MW">Malawi</option>
+            <option value="MY">Malaysia</option>
+            <option value="MV">Maldives</option>
+            <option value="ML">Mali</option>
+            <option value="MT">Malta</option>
+            <option value="MH">Marshall Islands</option>
+            <option value="MQ">Martinique</option>
+            <option value="MR">Mauritania</option>
+            <option value="MU">Mauritius</option>
+            <option value="YT">Mayotte</option>
+            <option value="MX">Mexico</option>
+            <option value="FM">Micronesia</option>
+            <option value="MD">Moldova</option>
+            <option value="MC">Monaco</option>
+            <option value="MN">Mongolia</option>
+            <option value="MS">Montserrat</option>
+            <option value="MA">Morocco</option>
+            <option value="MZ">Mozambique</option>
+            <option value="MM">Myanmar</option>
+            <option value="NA">Namibia</option>
+            <option value="NR">Nauru</option>
+            <option value="NP">Nepal</option>
+            <option value="NL">Netherlands</option>
+            <option value="AN">Netherlands Antilles</option>
+            <option value="NC">New Caledonia</option>
+            <option value="NZ">New Zealand</option>
+            <option value="NI">Nicaragua</option>
+            <option value="NE">Niger</option>
+            <option value="NG">Nigeria</option>
+            <option value="NU">Niue</option>
+            <option value="NF">Norfolk Island</option>
+            <option value="KP">North Korea</option>
+            <option value="MP">Northern Mariana Islands</option>
+            <option value="NO">Norway</option>
+            <option value="OM">Oman</option>
+            <option value="PK">Pakistan</option>
+            <option value="PW">Palau</option>
+            <option value="PS">Palestine</option>
+            <option value="PA">Panama</option>
+            <option value="PG">Papua New Guinea</option>
+            <option value="PY">Paraguay</option>
+            <option value="PE">Peru</option>
+            <option value="PH">Philippines</option>
+            <option value="PN">Pitcairn</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="QA">Qatar</option>
+            <option value="RE">Reunion</option>
+            <option value="RO">Romania</option>
+            <option value="RU">Russia</option>
+            <option value="RW">Rwanda</option>
+            <option value="SH">Saint Helena</option>
+            <option value="KN">Saint Kitts And Nevis</option>
+            <option value="LC">Saint Lucia</option>
+            <option value="PM">Saint Pierre And Miquelon</option>
+            <option value="VC">Saint Vincent And The Grenadines</option>
+            <option value="WS">Samoa</option>
+            <option value="SM">San Marino</option>
+            <option value="ST">Sao Tome And Principe</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="SN">Senegal</option>
+            <option value="CS">Serbia and Montenegro</option>
+            <option value="SC">Seychelles</option>
+            <option value="SL">Sierra Leone</option>
+            <option value="SG">Singapore</option>
+            <option value="SK">Slovakia</option>
+            <option value="SI">Slovenia</option>
+            <option value="SB">Solomon Islands</option>
+            <option value="SO">Somalia</option>
+            <option value="ZA">South Africa</option>
+            <option value="GS">South Georgia And The South Sandwich Islands</option>
+            <option value="KR">South Korea</option>
+            <option value="ES">Spain</option>
+            <option value="LK">Sri Lanka</option>
+            <option value="SD">Sudan</option>
+            <option value="SR">Suriname</option>
+            <option value="SJ">Svalbard And Jan Mayen</option>
+            <option value="SZ">Swaziland</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="SY">Syria</option>
+            <option value="TW">Taiwan</option>
+            <option value="TJ">Tajikistan</option>
+            <option value="TZ">Tanzania</option>
+            <option value="TH">Thailand</option>
+            <option value="CD">The Democratic Republic Of Congo</option>
+            <option value="TL">Timor-Leste</option>
+            <option value="TG">Togo</option>
+            <option value="TK">Tokelau</option>
+            <option value="TO">Tonga</option>
+            <option value="TT">Trinidad and Tobago</option>
+            <option value="TN">Tunisia</option>
+            <option value="TR">Turkey</option>
+            <option value="TM">Turkmenistan</option>
+            <option value="TC">Turks And Caicos Islands</option>
+            <option value="TV">Tuvalu</option>
+            <option value="VI">U.S. Virgin Islands</option>
+            <option value="UG">Uganda</option>
+            <option value="UA">Ukraine</option>
+            <option value="AE">United Arab Emirates</option>
+            <option value="GB">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="UM">United States Minor Outlying Islands</option>
+            <option value="UY">Uruguay</option>
+            <option value="UZ">Uzbekistan</option>
+            <option value="VU">Vanuatu</option>
+            <option value="VA">Vatican</option>
+            <option value="VE">Venezuela</option>
+            <option value="VN">Vietnam</option>
+            <option value="WF">Wallis And Futuna</option>
+            <option value="EH">Western Sahara</option>
+            <option value="YE">Yemen</option>
+            <option value="ZM">Zambia</option>
+            <option value="ZW">Zimbabwe</option>
+            <option value="AX">Åland Islands</option>
+          </select>
+        </div>
+      </div>
+      <div class="row ei_div_pay">
+        <div class="col-xs-16 col-md-6">
+          <button id="but_thanh_toan" class="btn btn-primary btn-xs bt-main but_thanh_toan" (click)="Ending()" >
+            Thanh toán</button>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <button id="but_thanh_toan" class="btn btn-danger btn-xs bt-main but_thanh_toan" [routerLink]="['../../selected',maPhim]" >
+            Hủy</button>
+        </div>
+      </div>
+    </div>
+    <div class="div_clear"></div>
+  </div>
+</div>
+
+
+

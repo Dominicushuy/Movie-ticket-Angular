@@ -1,0 +1,47 @@
+<div class="header" (scroll)="onWindowScroll()" >
+  <div class="logo-mb" ></div>
+  <div class="top">
+    <!--//logo-part//-->
+    <div class="logo" ></div>
+    <!--//logo-part//-->
+    <!--//facilities-part//-->
+    <div class="facilities-nav">
+      <!--search-->
+      <div class="search-form">
+        <div class="form-row-search">
+          <form onsubmit="return false;" action="" id="search" method="get">
+            <input id="qsearch" type="text" class="search-field" value="Tìm kiếm...">
+          </form>
+        </div>
+        <a href="javascript:void(0);" class="search">Search</a>
+      </div>
+      <!--search-->
+      <!--laguage-->
+      <form style="display: inline" id="change_lang" enctype="multipart/form-data" method="post" action="http://cinestar.com.vn/index.php?route=common/home">
+        <a class="language show" >
+          <img class="img-responsive" src="../../../../../assets/img/vn.png" alt="Ngôn ngữ">
+        </a>
+      </form>
+      <!--laguage-->
+    </div>
+    <!--//facilities-part//-->
+    <!--menu-->
+    <div class="navigation" style="height: auto;">
+      <div class="nav">
+        <ul>
+          <li><a [routerLink]="['/home']"><h1>Home</h1></a></li>
+          <li><a [routerLink]="['phimdangchieu']"><h1>Phim</h1></a></li>
+          <li><a><h1>Lịch chiếu</h1></a></li>
+          <li><a><h1>Blog</h1></a></li>
+          <li><a><h1>Khuyến mãi</h1></a></li>
+          <li><a><h1>Tin tức</h1></a></li>
+          <li><a><h1>Liên hệ</h1></a></li>
+        </ul>
+      </div>
+    </div>
+    <!--menu-->
+  </div>
+</div>
+
+
+

@@ -1,0 +1,82 @@
+<!-- Demo phim -->
+<div class="content-demo" style="display: block">
+  <div class="sub-tab">
+    <ul>
+      <li style="z-index: 3;" (click)="onShow(1)" [ngClass]="{'current': show == false}">
+        <a data-name="playing">Phim đang chiếu</a>
+      </li>
+      <li style="z-index: 2;" (click)="onShow(2)" [ngClass]="{'current': show == true}">
+        <a data-name="coming">Phim sắp chiếu</a>
+      </li>
+      <li style="z-index: 1;" (click)="onShow(3)">
+        <a data-name="special">Suất chiếu đặc biệt</a>
+      </li>
+    </ul>
+  </div>
+  <div class="movie-content">
+    <div class="movie-wrap">
+      <div class="movie-load" style="opacity: 1;">
+        <div class="movie-slide slide-slidebox" style="opacity: 1; display: inline-block;">
+          <div class="slide-wrapper-outer">
+            <div class="slide-wrapper " style=" display: block;width: 1680px;left: 0px; margin-left: 0px; transition: all 200ms ease 0s; transform: translate3d(0px, 0px, 0px);" *ngIf="show == false">
+              <div class="slide-item" style="width: 240px;" *ngFor="let phim of danhSachPhim | slice:0:7">
+                <div class="movie-item n_2d " (mouseenter)="showInfo($event)" (mouseleave)="OffInfo($event)">
+                  <div class="movie-pic"><img class="lazyload" alt="Trí Lực Siêu Phàm (C16)" src="{{phim.HinhAnh}}" style="display: block;"></div>
+                  <div class="movie-txt">
+                    <h3>{{phim.TenPhim}}</h3>
+                  </div>
+                  <div class="movie-over">
+                    <a [routerLink]="['chitiet',phim.MaPhim]">
+                      <p>{{phim.MoTa}}</p><span class="atc" style="display: block;">...</span>
+                      <span class="detail-link">Chi tiết</span>
+                    </a>
+                    <a class="trailler-btn fontsize13" (click)="viewTrailer(phim.Trailer)">Xem trailer</a>
+                    <a class="cart-btn fontsize13" [routerLink]="['chitiet',phim.MaPhim]">Mua vé</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-wrapper-outer">
+            <div class="slide-wrapper " style=" display: block;width: 1680px;left: 0px; margin-left: 0px; transition: all 200ms ease 0s; transform: translate3d(0px, 0px, 0px);" *ngIf="show == true">
+              <div class="slide-item" style="width: 240px;" *ngFor="let phim of danhSachPhim | slice:6:8">
+                <div class="movie-item n_2d " (mouseenter)="showInfo($event)" (mouseleave)="OffInfo($event)">
+                  <div class="movie-pic"><img class="lazyload" src="{{phim.HinhAnh}}" style="display: block;"></div>
+                  <div class="movie-txt">
+                    <h3>{{phim.TenPhim}}</h3>
+                  </div>
+                  <div class="movie-over">
+                    <a [routerLink]="['chitiet',phim.MaPhim]">
+                      <p>{{phim.MoTa}}</p><span class="atc" style="display: block;">...</span>
+                      <span class="detail-link">Chi tiết</span>
+                    </a>
+                    <a class="trailler-btn fontsize13" (click)="viewTrailer(phim.Trailer)">Xem trailer</a>
+                    <a class="cart-btn fontsize13" [routerLink]="['chitiet',phim.MaPhim]">Mua vé</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-controls clickable">
+            <div class="slide-buttons">
+              <div class="slide-prev" id="prevControl">prev</div>
+              <div class="slide-next" id="nextControl">next</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Show trailer -->
+<div class="allvideo" style="width: 100%;" [ngStyle]="{ 'display' : showTrailer ? 'block' : 'none' }">
+  <div class="video-list">
+    <div class="close-video" (click)="closeTrailer()"></div>
+    <div class="video-wrap">
+      <iframe width="100%" height="100%" [src]="Trailer | safe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>  
+
+
